@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 20:11:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/02 23:19:55 by afpachec         ###   ########.fr       */
+/*   Created: 2024/10/30 12:47:32 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/02 23:33:01 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/libft.h"
 
-int	main(int argc, char **argv)
+ssize_t	ft_putstr_fd(char *s, int fd)
 {
-	if (argc != 2)
-		return (error("Invalid number of arguments"), 1);
-	(void)argv;
-	return (write(1, "Hello from so_long :)\n", 22));
+	if (!s)
+		return (write(fd, "(nil)", 5));
+	return (write(fd, s, ft_strlen(s)));
 }

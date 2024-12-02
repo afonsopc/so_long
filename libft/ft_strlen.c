@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 20:11:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/02 23:19:55 by afpachec         ###   ########.fr       */
+/*   Created: 2024/10/28 13:12:07 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/02 22:50:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-	if (argc != 2)
-		return (error("Invalid number of arguments"), 1);
-	(void)argv;
-	return (write(1, "Hello from so_long :)\n", 22));
+	size_t	count;
+
+	count = 0;
+	while (s[count])
+		count++;
+	return (count);
 }

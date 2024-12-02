@@ -1,16 +1,27 @@
 NAME = so_long
 SRC = main.c
-OBJ = $(SRC:.c=.o)
+SRC += utils/error.c
+SRC += libft/ft_strlen.c libft/ft_putstr_fd.c
+OBJDIR = objs/
+OBJ = $(notdir $(SRC:.c=.o))
+OBJS = $(addprefix $(OBJDIR), $(OBJ))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+VPATH = utils:libft
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+$(NAME): $(OBJDIR) $(OBJS)
+	cc $(CFLAGS) $(OBJS) -o $(NAME)
+
+$(OBJDIR)%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
