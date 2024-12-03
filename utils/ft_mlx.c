@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/03 22:18:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/03 22:49:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ t_mlx	*init_mlx(void)
 	if (!mlx)
 		return (NULL);
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx, 500, 500, "So Long!");
+	mlx->win = mlx_new_window(mlx, 500, 285, "So Long!");
 	return (mlx);
 }

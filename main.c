@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:11:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/03 22:32:43 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/03 22:50:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,34 @@ void	square(t_mlx *mlx, int x, int y, int size, int color)
 
 void	flag(t_mlx *mlx)
 {
-	square(mlx, 200, 100, 300, 0xFFFFFF);
-	square(mlx, -50, 100, 300, 0x0000FF);
-	square(mlx, 200, 200, 100, 0xFF0000);
-	square(mlx, 220, 220, 60, 0xFFFFFF);
-	square(mlx, 245, 225, 10, 0x0000FF);
-	square(mlx, 245, 245, 10, 0x0000FF);
-	square(mlx, 245, 265, 10, 0x0000FF);
-	square(mlx, 225, 245, 10, 0x0000FF);
-	square(mlx, 245, 245, 10, 0x0000FF);
-	square(mlx, 265, 245, 10, 0x0000FF);
-	square(mlx, 285, 205, 10, 0xFFD70D);
-	square(mlx, 265, 205, 10, 0xFFD70D);
-	square(mlx, 245, 205, 10, 0xFFD70D);
-	square(mlx, 225, 205, 10, 0xFFD70D);
-	square(mlx, 205, 205, 10, 0xFFD70D);
-	square(mlx, 285, 225, 10, 0xFFD70D);
-	square(mlx, 285, 245, 10, 0xFFD70D);
-	square(mlx, 285, 265, 10, 0xFFD70D);
-	square(mlx, 285, 285, 10, 0xFFD70D);
-	square(mlx, 285, 285, 10, 0xFFD70D);
-	square(mlx, 265, 285, 10, 0xFFD70D);
-	square(mlx, 245, 285, 10, 0xFFD70D);
-	square(mlx, 225, 285, 10, 0xFFD70D);
-	square(mlx, 205, 285, 10, 0xFFD70D);
-	square(mlx, 205, 225, 10, 0xFFD70D);
-	square(mlx, 205, 245, 10, 0xFFD70D);
-	square(mlx, 205, 265, 10, 0xFFD70D);
-	square(mlx, 205, 285, 10, 0xFFD70D);
+	square(mlx, 200, 0, 300, 0xFFFFFF);
+	square(mlx, -50, 0, 300, 0x0000FF);
+	square(mlx, 200, 100, 100, 0xFF0000);
+	square(mlx, 220, 120, 60, 0xFFFFFF);
+	square(mlx, 245, 125, 10, 0x0000FF);
+	square(mlx, 245, 145, 10, 0x0000FF);
+	square(mlx, 245, 165, 10, 0x0000FF);
+	square(mlx, 225, 145, 10, 0x0000FF);
+	square(mlx, 245, 145, 10, 0x0000FF);
+	square(mlx, 265, 145, 10, 0x0000FF);
+	square(mlx, 285, 105, 10, 0xFFD70D);
+	square(mlx, 265, 105, 10, 0xFFD70D);
+	square(mlx, 245, 105, 10, 0xFFD70D);
+	square(mlx, 225, 105, 10, 0xFFD70D);
+	square(mlx, 205, 105, 10, 0xFFD70D);
+	square(mlx, 285, 125, 10, 0xFFD70D);
+	square(mlx, 285, 145, 10, 0xFFD70D);
+	square(mlx, 285, 165, 10, 0xFFD70D);
+	square(mlx, 285, 185, 10, 0xFFD70D);
+	square(mlx, 285, 185, 10, 0xFFD70D);
+	square(mlx, 265, 185, 10, 0xFFD70D);
+	square(mlx, 245, 185, 10, 0xFFD70D);
+	square(mlx, 225, 185, 10, 0xFFD70D);
+	square(mlx, 205, 185, 10, 0xFFD70D);
+	square(mlx, 205, 125, 10, 0xFFD70D);
+	square(mlx, 205, 145, 10, 0xFFD70D);
+	square(mlx, 205, 165, 10, 0xFFD70D);
+	square(mlx, 205, 185, 10, 0xFFD70D);
 }
 
 int	main(int argc, char **argv)
