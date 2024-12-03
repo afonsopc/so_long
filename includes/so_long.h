@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/02 23:28:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/03 22:18:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,16 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "mlx.h"
 
-void	error(char *message);
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+}	t_mlx;
+
+t_mlx	*get_mlx(void);
+void	ft_error(char *message);
+t_mlx	*init_mlx(void);
 
 #endif

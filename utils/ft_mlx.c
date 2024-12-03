@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_mlx.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 13:12:07 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/03 17:05:04 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/03 22:18:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../includes/so_long.h"
 
-ssize_t	ft_strlen(const char *s)
+t_mlx	*get_mlx(void)
 {
-	ssize_t	count;
+	static t_mlx	*mlx;
 
-	if (!s)
-		return (-1);
-	count = 0;
-	while (s[count])
-		count++;
-	return (count);
+	return (mlx);
+}
+
+t_mlx	*init_mlx(void)
+{
+	t_mlx	*mlx;
+
+	mlx = malloc(sizeof(t_mlx));
+	if (!mlx)
+		return (NULL);
+	mlx->mlx = mlx_init();
+	mlx->win = mlx_new_window(mlx, 500, 500, "So Long!");
+	return (mlx);
 }
