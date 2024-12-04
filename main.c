@@ -6,70 +6,79 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:11:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/03 22:50:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/04 21:12:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 
-void	square(t_mlx *mlx, int x, int y, int size, int color)
+int	frame(void)
 {
-	int	tmp_y;
-	int	tmp_x;
-
-	tmp_y = y - 1;
-	while (++tmp_y <= y + size)
-	{
-		tmp_x = x - 1;
-		while (++tmp_x <= x + size)
-			mlx_pixel_put(mlx->mlx, mlx->win, tmp_x, tmp_y, color);
-	}
+	global_player()->move();
+	mlx_put_image_to_window(global_mlx()->mlx, global_mlx()->win,
+		global_canvas()->canvas, 0, 0);
+	mlx_put_image_to_window(global_mlx()->mlx, global_mlx()->win,
+		global_player()->get_sprite()->image->image,
+		global_player()->x, global_player()->y);
+	return (0);
 }
 
-void	flag(t_mlx *mlx)
+int	key_press_frame(int key_code)
 {
-	square(mlx, 200, 0, 300, 0xFFFFFF);
-	square(mlx, -50, 0, 300, 0x0000FF);
-	square(mlx, 200, 100, 100, 0xFF0000);
-	square(mlx, 220, 120, 60, 0xFFFFFF);
-	square(mlx, 245, 125, 10, 0x0000FF);
-	square(mlx, 245, 145, 10, 0x0000FF);
-	square(mlx, 245, 165, 10, 0x0000FF);
-	square(mlx, 225, 145, 10, 0x0000FF);
-	square(mlx, 245, 145, 10, 0x0000FF);
-	square(mlx, 265, 145, 10, 0x0000FF);
-	square(mlx, 285, 105, 10, 0xFFD70D);
-	square(mlx, 265, 105, 10, 0xFFD70D);
-	square(mlx, 245, 105, 10, 0xFFD70D);
-	square(mlx, 225, 105, 10, 0xFFD70D);
-	square(mlx, 205, 105, 10, 0xFFD70D);
-	square(mlx, 285, 125, 10, 0xFFD70D);
-	square(mlx, 285, 145, 10, 0xFFD70D);
-	square(mlx, 285, 165, 10, 0xFFD70D);
-	square(mlx, 285, 185, 10, 0xFFD70D);
-	square(mlx, 285, 185, 10, 0xFFD70D);
-	square(mlx, 265, 185, 10, 0xFFD70D);
-	square(mlx, 245, 185, 10, 0xFFD70D);
-	square(mlx, 225, 185, 10, 0xFFD70D);
-	square(mlx, 205, 185, 10, 0xFFD70D);
-	square(mlx, 205, 125, 10, 0xFFD70D);
-	square(mlx, 205, 145, 10, 0xFFD70D);
-	square(mlx, 205, 165, 10, 0xFFD70D);
-	square(mlx, 205, 185, 10, 0xFFD70D);
+	if (key_code == KEY_W)
+		global_player()->move_up = 1;
+	if (key_code == KEY_A)
+		global_player()->move_left = 1;
+	if (key_code == KEY_S)
+		global_player()->move_down = 1;
+	if (key_code == KEY_D)
+		global_player()->move_right = 1;
+	return (0);
+}
+
+int	key_release_frame(int key_code)
+{
+	if (key_code == KEY_W)
+		global_player()->move_up = 0;
+	if (key_code == KEY_A)
+		global_player()->move_left = 0;
+	if (key_code == KEY_S)
+		global_player()->move_down = 0;
+	if (key_code == KEY_D)
+		global_player()->move_right = 0;
+	return (0);
+}
+
+// return (write(1, "Hello from so_long :)\n", 22));
+
+void	draw_canvas(void)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y <= W_HEIGHT)
+	{
+		x = -1;
+		while (++x <= W_WIDTH)
+			put_pixel(x, y, 0xFFFFFF);
+	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_mlx	*mlx;
-
 	if (argc != 2)
-		return (ft_error("Invalid number of arguments"), 1);
-	mlx = get_mlx();
-	mlx = init_mlx();
-	if (!mlx)
-		return (ft_error("MLX initialization"), 1);
-	flag(mlx);
-	mlx_loop(mlx);
+		return (ft_error("Invalid number of arguments"));
+	if (!init_mlx())
+		return (ft_error("MLX initialization"));
+	if (!init_canvas())
+		return (free_mlx(), ft_error("Canvas initialization"));
+	if (!init_player())
+		return (free_mlx(), ft_error("Player initialization"));
+	draw_canvas();
+	mlx_loop_hook(global_mlx()->mlx, frame, NULL);
+	mlx_hook(global_mlx()->win, 3, 2, key_release_frame, NULL);
+	mlx_hook(global_mlx()->win, 2, 3, key_press_frame, NULL);
+	mlx_loop(global_mlx()->mlx);
 	(void)argv;
-	return (write(1, "Hello from so_long :)\n", 22));
 }

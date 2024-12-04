@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_sprite.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 20:46:14 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/04 16:24:29 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/04 19:38:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-ssize_t	ft_error(char *message)
+t_sprite	*sprite_new(char	*path)
 {
-	if (!message)
-		return (ft_error("Is this Nierlicious or DIVINE intelect?"));
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd("\n", 2);
-	return (ft_strlen(message));
+	t_sprite	*sprite;
+
+	if (!path)
+		return (NULL);
+	sprite = malloc(sizeof(t_sprite));
+	if (!sprite)
+		return (NULL);
+	sprite->image = new_image_from_file(path);
+	if (!sprite->image)
+		return (free(sprite), NULL);
+	sprite->next = NULL;
+	return (sprite);
+}
+
+void	sprite_append(t_sprite	*head, t_sprite *new)
+{
+	if (!new || !head)
+		return ;
+	while (head->next)
+		head = head->next;
+	head->next = new;
 }
