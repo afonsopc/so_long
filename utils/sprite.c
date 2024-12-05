@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sprite.c                                         :+:      :+:    :+:   */
+/*   ft_sprite.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/04 19:38:00 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/05 22:45:21 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	free_sprite(t_sprite *sprite)
+{
+	free_image(sprite->image);
+	free(sprite);
+}
+
+void	free_sprites(t_sprite *sprite)
+{
+	t_sprite	*next;
+
+	while (sprite)
+	{
+		next = sprite->next;
+		free_sprite(sprite);
+		sprite = next;
+	}
+}
 
 t_sprite	*sprite_new(char	*path)
 {

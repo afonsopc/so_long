@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:11:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/04 21:12:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/05 22:48:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 int	frame(void)
 {
-	global_player()->move();
+	t_object	*object;
+
+	object = (t_object *)global_player();
+	object->entity->move(object);
 	mlx_put_image_to_window(global_mlx()->mlx, global_mlx()->win,
 		global_canvas()->canvas, 0, 0);
 	mlx_put_image_to_window(global_mlx()->mlx, global_mlx()->win,
-		global_player()->get_sprite()->image->image,
-		global_player()->x, global_player()->y);
+		object->entity->get_sprite(object)->image->image,
+		object->entity->x, object->entity->y);
 	return (0);
 }
 

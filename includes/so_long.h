@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/04 21:22:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/05 22:50:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,39 +63,55 @@ typedef struct s_sprite
 	void	*next;
 }	t_sprite;
 
-typedef struct s_player
+typedef struct s_entity
 {
-	t_sprite		*sprite;
-	int				height;
-	int				width;
-	void			(*move)();
-	t_sprite		*(*get_sprite)();
-	int				speed;
+	void			(*move)(void *this);
+	t_sprite		*(*get_sprite)(void *this);
 	int				x;
 	int				y;
+}	t_entity;
+
+typedef struct s_player
+{
+	t_entity		*entity;
+	t_sprite		*sprite;
+	int				speed;
 	int				move_up;
 	int				move_down;
 	int				move_left;
 	int				move_right;
+	int				points;
 	struct timeval	last_sprite_change;
 }	t_player;
+
+typedef struct s_object
+{
+	t_entity	*entity;
+}	t_object;
 
 typedef struct s_canvas
 {
 	void	*canvas;
 }	t_canvas;
 
-void		free_mlx(void);
-void		put_pixel(int x, int y, int color);
-t_mlx		*global_mlx(void);
-ssize_t		ft_error(char *message);
-int			init_mlx(void);
-t_canvas	*global_canvas(void);
-int			init_canvas(void);
-t_player	*global_player(void);
 t_image		*new_image_from_file(char	*path);
-int			init_player(void);
-t_sprite	*sprite_new(char	*path);
 void		sprite_append(t_sprite	*head, t_sprite *new);
+void		put_pixel(int x, int y, int color);
+ssize_t		ft_error(char *message);
+
+void		free_sprites(t_sprite *sprite);
+void		free_image(t_image	*image);
+void		free_mlx(void);
+
+t_canvas	*global_canvas(void);
+t_player	*global_player(void);
+t_mlx		*global_mlx(void);
+
+t_sprite	*sprite_new(char	*path);
+t_entity	*entity_new(void);
+
+int			init_canvas(void);
+int			init_player(void);
+int			init_mlx(void);
 
 #endif

@@ -1,9 +1,10 @@
 NAME = so_long
 SRC = main.c
-SRC += utils/ft_error.c utils/ft_mlx.c utils/ft_canvas.c utils/ft_player.c utils/ft_image.c utils/ft_sprite.c
+SRC += utils/player/player.c utils/player/entity.c utils/player/global.c
+SRC += utils/error.c utils/mlx.c utils/canvas.c utils/image.c utils/sprite.c utils/entity.c
 SRC += libft/ft_strlen.c libft/ft_putstr_fd.c libft/ft_abs.c
 OBJDIR = objs/
-OBJ = $(notdir $(SRC:.c=.o))
+OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJDIR), $(OBJ))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -12,23 +13,35 @@ VPATH = utils:libft
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(OBJS)
-	cc $(CFLAGS) $(OBJS) -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -lm -framework OpenGL -framework AppKit -o $(NAME)
+	@echo "\nCompiling $(NAME)...\033[0m"
+	@cc $(CFLAGS) $(OBJS) -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -lm -framework OpenGL -framework AppKit -o $(NAME)
 
 $(OBJDIR)%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@printf "."
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
+	@printf "\033[1;33mCompiling"
+	@mkdir -p $(OBJDIR)
 
 clean:
-	rm -rf $(OBJDIR)
+	@echo "\033[1;31mCleaning objects...\033[0m"
+	@rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "\033[1;31mCleaning binaries...\033[0m"
+	@rm -f $(NAME)
 
 re: fclean all
 
 run: re
-	./$(NAME) 2D_map.ber
+	@echo "\033[1;32mRunning $(NAME)...\033[0m"
+	@./$(NAME) 2D_map.ber
+
+norm:
+	@mv includes/mlx.h includes/mlx.h.bak
+	@norminette
+	@mv includes/mlx.h.bak includes/mlx.h
 
 .PHONY: all clean fclean re
