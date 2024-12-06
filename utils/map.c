@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   global.c                                           :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 21:29:02 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 17:28:52 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/06 22:47:38 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/06 22:59:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "../includes/so_long.h"
 
-t_map	**get_global_map(void)
+int	load_map(char *path)
 {
-	static t_map	*map;
+	t_object_list	**object_list;
 
-	return (&map);
-}
-
-t_map	*global_map(void)
-{
-	return (*get_global_map());
+	(void)path;
+	if (!init_player(0, 0))
+		return (0);
+	object_list = global_object_list();
+	*object_list = object_list_new((t_object *)global_player());
+	if (!*object_list)
+		return (global_player()->entity->free((void *)global_player()), 0);
+	return (1);
 }

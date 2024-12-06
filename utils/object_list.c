@@ -6,11 +6,18 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:31:11 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 17:46:55 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/06 22:06:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+t_object_list	**global_object_list(void)
+{
+	static t_object_list	*object_list;
+
+	return (&object_list);
+}
 
 t_object_list	*object_list_new(t_object *object)
 {

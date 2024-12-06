@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/05 23:57:30 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/06 23:03:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ int	init_canvas(void)
 	return (1);
 }
 
+void	free_canvas(void)
+{
+	t_image	*canvas;
+
+	canvas = *get_global_canvas();
+	free_image(canvas->image);
+	free(canvas);
+}
+
 void	clear_canvas(void)
 {
 	int	y;
@@ -44,5 +53,18 @@ void	clear_canvas(void)
 		x = -1;
 		while (++x <= global_canvas()->width)
 			put_pixel(global_canvas(), x, y, 0xFFFFFF);
+	}
+}
+
+void	put_objects_in_canvas(t_object_list *object_list)
+{
+	while (object_list)
+	{
+		put_image(
+			object_list->object->entity
+			->get_sprite((void *)object_list->object)->image,
+			global_canvas(), object_list->object->entity->x,
+			object_list->object->entity->y);
+		object_list = object_list->next;
 	}
 }
