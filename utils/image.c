@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_image.c                                         :+:      :+:    :+:   */
+/*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/05 22:07:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/06 00:01:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,54 @@ t_image	*new_image_from_file(char	*path)
 	if (!image->image)
 		return (free(image), NULL);
 	return (image);
+}
+
+unsigned int	get_pixel(t_image *image, int x, int y)
+{
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	char	*data;
+	char	*pixel;
+
+	data = mlx_get_data_addr(image->image, &bits_per_pixel,
+			&size_line, &endian);
+	pixel = data + (y * size_line) + (x * (bits_per_pixel / 8));
+	return (*(unsigned int *)pixel);
+}
+
+void	put_pixel(t_image *image, int x, int y, unsigned int color)
+{
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	char	*data;
+	char	*pixel;
+
+	if (x < 0 || y < 0
+		|| x >= image->width || y >= image->height)
+		return ;
+	data = mlx_get_data_addr(image->image, &bits_per_pixel,
+			&size_line, &endian);
+	pixel = data + (y * size_line) + (x * (bits_per_pixel / 8));
+	*(unsigned int *)pixel = color;
+}
+
+void	put_image(t_image *src, t_image *dst, int x, int y)
+{
+	int				i;
+	int				j;
+	unsigned int	color;
+
+	i = -1;
+	while (++i < src->width)
+	{
+		j = -1;
+		while (++j < src->height)
+		{
+			color = get_pixel(src, i, j);
+			if (color != 0xFF000000)
+				put_pixel(dst, x + i, y + j, color);
+		}
+	}
 }

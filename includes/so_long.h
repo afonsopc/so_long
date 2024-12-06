@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/05 22:50:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/05 23:54:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,29 +89,28 @@ typedef struct s_object
 	t_entity	*entity;
 }	t_object;
 
-typedef struct s_canvas
-{
-	void	*canvas;
-}	t_canvas;
+t_image			*new_image_from_file(char	*path);
+void			sprite_append(t_sprite	*head, t_sprite *new);
+ssize_t			ft_error(char *message);
+void			clear_canvas(void);
 
-t_image		*new_image_from_file(char	*path);
-void		sprite_append(t_sprite	*head, t_sprite *new);
-void		put_pixel(int x, int y, int color);
-ssize_t		ft_error(char *message);
+void			free_sprites(t_sprite *sprite);
+void			free_image(t_image	*image);
+void			free_mlx(void);
 
-void		free_sprites(t_sprite *sprite);
-void		free_image(t_image	*image);
-void		free_mlx(void);
+t_image			*global_canvas(void);
+t_player		*global_player(void);
+t_mlx			*global_mlx(void);
 
-t_canvas	*global_canvas(void);
-t_player	*global_player(void);
-t_mlx		*global_mlx(void);
+t_sprite		*sprite_new(char	*path);
+t_entity		*entity_new(void);
 
-t_sprite	*sprite_new(char	*path);
-t_entity	*entity_new(void);
+int				init_canvas(void);
+int				init_player(void);
+int				init_mlx(void);
 
-int			init_canvas(void);
-int			init_player(void);
-int			init_mlx(void);
+unsigned int	get_pixel(t_image *image, int x, int y);
+void			put_pixel(t_image *image, int x, int y, unsigned int color);
+void			put_image(t_image *src, t_image *dst, int x, int y);
 
 #endif
