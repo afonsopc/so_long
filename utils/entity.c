@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_object.c                                        :+:      :+:    :+:   */
+/*   entity.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/05 22:20:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:00:45 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,13 @@ t_sprite	*default_get_sprite(void *this)
 	return (sprite_new("assets/pt.xpm"));
 }
 
-t_entity	*entity_new(void)
+void	default_free(void *this)
+{
+	(void)this;
+	ft_error("free() not implemented. (could cause leaks)");
+}
+
+t_entity	*entity_new(int x, int y)
 {
 	t_entity		*entity;
 
@@ -34,7 +40,8 @@ t_entity	*entity_new(void)
 		return (NULL);
 	entity->get_sprite = default_get_sprite;
 	entity->move = default_move;
-	entity->x = 0;
-	entity->y = 0;
+	entity->free = default_free;
+	entity->x = x;
+	entity->y = y;
 	return (entity);
 }

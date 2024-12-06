@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sprite.c                                        :+:      :+:    :+:   */
+/*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/05 22:45:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:54:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,20 @@ void	free_sprite(t_sprite *sprite)
 
 void	free_sprites(t_sprite *sprite)
 {
+	t_sprite	*curr;
 	t_sprite	*next;
+	int			first;
 
-	while (sprite)
+	curr = sprite;
+	first = 1;
+	while (curr)
 	{
-		next = sprite->next;
-		free_sprite(sprite);
-		sprite = next;
+		if (!first && curr == sprite)
+			break ;
+		first = 0;
+		next = curr->next;
+		free_sprite(curr);
+		curr = next;
 	}
 }
 

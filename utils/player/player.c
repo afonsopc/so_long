@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/05 23:58:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:58:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_player_sprites(t_player *player)
 	return (1);
 }
 
-int	init_player(void)
+int	init_player(int x, int y)
 {
 	t_player		**player_ptr;
 	t_player		*player;
@@ -44,11 +44,12 @@ int	init_player(void)
 	player = *player_ptr;
 	if (!init_player_sprites(player))
 		return (free(player), 0);
-	player->entity = entity_new();
+	player->entity = entity_new(x, y);
 	if (!player->entity)
 		return (free_sprites(player->sprite), free(player), 0);
 	player->entity->get_sprite = player_get_sprite;
 	player->entity->move = player_move;
+	player->entity->free = player_free;
 	player->move_up = 0;
 	player->move_down = 0;
 	player->move_left = 0;

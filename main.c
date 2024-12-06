@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:11:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 00:01:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:05:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 int	frame(void)
 {
-	t_object	*object;
+	t_object_list	*curr_object;
 
 	clear_canvas();
-	object = (t_object *)global_player();
-	object->entity->move(object);
-	put_image(object->entity->get_sprite(object)->image,
-		global_canvas(), object->entity->x, object->entity->y);
+	curr_object = global_map()->object_list;
+	while (curr_object)
+	{
+		curr_object->object->entity->move(curr_object->object);
+		put_image(
+			curr_object->object->entity->get_sprite(curr_object->object)->image,
+			global_canvas(), curr_object->object->entity->x,
+			curr_object->object->entity->y);
+		curr_object = curr_object->next;
+	}
 	mlx_put_image_to_window(global_mlx()->mlx, global_mlx()->win,
 		global_canvas()->image, 0, 0);
 	return (0);
@@ -62,11 +68,10 @@ int	main(int argc, char **argv)
 		return (ft_error("MLX initialization"));
 	if (!init_canvas())
 		return (free_mlx(), ft_error("Canvas initialization"));
-	if (!init_player())
-		return (free_mlx(), ft_error("Player initialization"));
+	if (!init_map(argv[1]))
+		return (free_mlx(), ft_error("Map initialization"));
 	mlx_loop_hook(global_mlx()->mlx, frame, NULL);
 	mlx_hook(global_mlx()->win, 3, 2, key_release_frame, NULL);
 	mlx_hook(global_mlx()->win, 2, 3, key_press_frame, NULL);
 	mlx_loop(global_mlx()->mlx);
-	(void)argv;
 }

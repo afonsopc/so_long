@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.c                                           :+:      :+:    :+:   */
+/*   entity.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:24:56 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/05 22:20:42 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:55:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ t_sprite	*player_get_sprite(void *_this)
 		this->last_sprite_change = current_time;
 	}
 	return (sprite);
+}
+
+void	player_free(void *_this)
+{
+	t_player		*this;
+
+	this = (t_player *)_this;
+	free_sprites(this->sprite);
+	free(this->entity);
+	free(this);
 }

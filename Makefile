@@ -1,8 +1,9 @@
 NAME = so_long
 SRC = main.c
 SRC += utils/player/player.c utils/player/entity.c utils/player/global.c
+SRC += utils/map/map.c utils/map/global.c
 SRC += utils/canvas/canvas.c utils/canvas/global.c
-SRC += utils/error.c utils/mlx.c utils/image.c utils/sprite.c utils/entity.c
+SRC += utils/error.c utils/mlx.c utils/image.c utils/sprite.c utils/entity.c utils/object_list.c
 SRC += libft/ft_strlen.c libft/ft_putstr_fd.c libft/ft_abs.c
 OBJDIR = objs/
 OBJ = $(SRC:.c=.o)
