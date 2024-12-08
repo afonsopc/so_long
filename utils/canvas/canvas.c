@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 23:03:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:05:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ int	init_canvas(void)
 		return (free(canvas), 0);
 	canvas->image = canvas_img;
 	return (1);
-}
-
-void	free_canvas(void)
-{
-	t_image	*canvas;
-
-	canvas = *get_global_canvas();
-	free_image(canvas->image);
-	free(canvas);
 }
 
 void	clear_canvas(void)

@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 22:47:38 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 22:59:37 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/08 16:50:59 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/08 17:01:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#ifndef MAP_H
+# define MAP_H
 
-int	load_map(char *path)
+# include "../../includes/so_long.h"
+
+typedef struct map_parse
 {
-	t_object_list	**object_list;
+	char			*line;
+	char			*prev_line;
+	int				y;
+	int				exits;
+	int				starting_positions;
+	t_object		*obj;
+	t_object_list	*obj_list;
+	ssize_t			len;
+}	t_map_parse;
 
-	(void)path;
-	if (!init_player(0, 0))
-		return (0);
-	object_list = global_object_list();
-	*object_list = object_list_new((t_object *)global_player());
-	if (!*object_list)
-		return (global_player()->entity->free((void *)global_player()), 0);
-	return (1);
-}
+int	generate_objects(t_map_parse *parse);
+int	last_checks(t_map_parse *parse);
+int	checks_1(t_map_parse *parse);
+int	parse_map_file(int fd);
+
+#endif

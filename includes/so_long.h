@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 23:07:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:00:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <fcntl.h>
 # include "mlx.h"
 
 # ifndef W_HEIGHT
@@ -41,7 +42,15 @@
 # endif
 
 # ifndef W_WIDTH
-#  define W_WIDTH 500
+#  define W_WIDTH 1040
+# endif
+
+# ifndef SPRITE_WIDTH
+#  define SPRITE_WIDTH 80
+# endif
+
+# ifndef SPRITE_HEIGHT
+#  define SPRITE_HEIGHT 80
 # endif
 
 typedef struct s_mlx
@@ -68,6 +77,7 @@ typedef struct s_entity
 	void			(*move)(void *this);
 	t_sprite		*(*get_sprite)(void *this);
 	void			(*free)(void *this);
+	int				type;
 	int				x;
 	int				y;
 }	t_entity;
@@ -85,6 +95,24 @@ typedef struct s_player
 	struct timeval	last_sprite_change;
 }	t_player;
 
+typedef struct s_wall
+{
+	t_entity		*entity;
+	t_sprite		*sprite;
+}	t_wall;
+
+typedef struct s_food
+{
+	t_entity		*entity;
+	t_sprite		*sprite;
+}	t_food;
+
+typedef struct s_exit_place
+{
+	t_entity		*entity;
+	t_sprite		*sprite;
+}	t_exit_place;
+
 typedef struct s_object
 {
 	t_entity			*entity;
@@ -101,13 +129,13 @@ void			sprite_append(t_sprite	*head, t_sprite *new);
 ssize_t			ft_error(char *message);
 void			clear_canvas(void);
 t_object_list	*object_list_new(t_object *object);
-void			object_list_append(t_object_list *head, t_object_list *new);
-int				load_map(char *path);
+void			object_list_append(t_object_list **head, t_object_list *new);
+int				process_map(char *path);
 
 void			free_sprites(t_sprite *sprite);
 void			free_image(t_image	*image);
 void			free_mlx(void);
-void			free_canvas(void);
+void			free_object_list(t_object_list *object_list);
 
 t_image			*global_canvas(void);
 t_player		*global_player(void);
@@ -116,6 +144,9 @@ t_object_list	**global_object_list(void);
 
 t_sprite		*sprite_new(char	*path);
 t_entity		*entity_new(int x, int y);
+t_wall			*wall_new(int x, int y);
+t_food			*food_new(int x, int y);
+t_exit_place	*exit_place_new(int x, int y);
 
 int				init_canvas(void);
 int				init_player(int x, int y);

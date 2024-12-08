@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 00:01:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/07 23:10:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_image(t_image	*image)
 {
+	if (!image)
+		return ;
 	mlx_destroy_image(global_mlx()->mlx, image->image);
 	free(image);
 }

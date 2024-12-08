@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 23:56:49 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/07 22:45:06 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/06 22:47:38 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/08 17:00:19 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "map.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
+int	process_map(char *path)
+{
+	int				fd;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
-int				ft_count_occurrences(char *str, char to_count);
-ssize_t			ft_putstr_fd(char *s, int fd);
-ssize_t			ft_strlen(const char *s);
-unsigned int	ft_abs(int n);
-char			*ft_gnl(int fd);
-
-#endif
+	if (!path)
+		return (0);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (ft_error("Invalid map file"), 0);
+	if (!parse_map_file(fd))
+		return (0);
+	return (1);
+}

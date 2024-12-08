@@ -2,8 +2,9 @@ NAME = so_long
 SRC = main.c
 SRC += utils/player/player.c utils/player/entity.c utils/player/global.c
 SRC += utils/canvas/canvas.c utils/canvas/global.c
-SRC += utils/error.c utils/mlx.c utils/image.c utils/sprite.c utils/entity.c utils/object_list.c utils/map.c utils/loop.c
-SRC += libft/ft_strlen.c libft/ft_putstr_fd.c libft/ft_abs.c libft/ft_gnl.c
+SRC += utils/map/map.c utils/map/checks.c utils/map/process.c utils/map/generate.c
+SRC += utils/error.c utils/mlx.c utils/image.c utils/sprite.c utils/entity.c utils/object_list.c utils/loop.c utils/wall.c utils/food.c utils/exit_place.c
+SRC += libft/ft_strlen.c libft/ft_putstr_fd.c libft/ft_abs.c libft/ft_gnl.c libft/ft_count_occurrences.c
 OBJDIR = objs/
 OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJDIR), $(OBJ))
@@ -38,11 +39,11 @@ re: fclean all
 
 run: re
 	@echo "\033[1;32mRunning $(NAME)...\033[0m"
-	@./$(NAME) 1.ber
+	@./$(NAME) maps/1.ber
 
 norm:
 	@mv includes/mlx.h includes/mlx.h.bak
-	@norminette
+	-@norminette
 	@mv includes/mlx.h.bak includes/mlx.h
 
 .PHONY: all clean fclean re

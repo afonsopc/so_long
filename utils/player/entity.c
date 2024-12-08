@@ -6,25 +6,49 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:24:56 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 17:55:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:00:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 
+int	check_wall_collision(int new_x, int new_y)
+{
+	t_object_list	*curr;
+
+	curr = *global_object_list();
+	while (curr)
+	{
+		if (curr->object->entity->type == 2
+			&& new_x < curr->object->entity->x + SPRITE_WIDTH
+			&& new_x + SPRITE_WIDTH > curr->object->entity->x
+			&& new_y < curr->object->entity->y + SPRITE_HEIGHT
+			&& new_y + SPRITE_HEIGHT > curr->object->entity->y)
+			return (0);
+		curr = curr->next;
+	}
+	return (1);
+}
+
 void	player_move(void *_this)
 {
 	t_player		*this;
+	int				x;
+	int				y;
+	int				s;
 
 	this = (t_player *)_this;
-	if (this->move_up)
-		this->entity->y -= this->speed;
-	if (this->move_down)
-		this->entity->y += this->speed;
-	if (this->move_left)
-		this->entity->x -= this->speed;
-	if (this->move_right)
-		this->entity->x += this->speed;
+	x = this->entity->x;
+	y = this->entity->y;
+	s = this->speed;
+	if (this->move_up && check_wall_collision(x, y - s))
+		this->entity->y -= s;
+	if (this->move_down && check_wall_collision(x, y + s))
+		this->entity->y += s;
+	if (this->move_left && check_wall_collision(x - s, y))
+		this->entity->x -= s;
+	if (this->move_right && check_wall_collision(x + s, y))
+		this->entity->x += s;
 }
 
 t_sprite	*player_get_sprite(void *_this)

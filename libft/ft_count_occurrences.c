@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_count_occurrences.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 23:56:49 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/07 22:45:06 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/07 22:43:22 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/07 22:44:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+int	ft_count_occurrences(char *str, char to_count)
+{
+	int	occurrences;
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
-int				ft_count_occurrences(char *str, char to_count);
-ssize_t			ft_putstr_fd(char *s, int fd);
-ssize_t			ft_strlen(const char *s);
-unsigned int	ft_abs(int n);
-char			*ft_gnl(int fd);
-
-#endif
+	occurrences = 0;
+	while (str && *str)
+	{
+		if (*str == to_count)
+			occurrences++;
+		str++;
+	}
+	return (occurrences);
+}

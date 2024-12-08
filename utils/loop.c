@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:06:12 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 23:06:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:17:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	frame(void)
 
 int	key_press_frame(int key_code)
 {
+	if (!global_player())
+		return (0);
 	if (key_code == KEY_W)
 		global_player()->move_up = 1;
 	if (key_code == KEY_A)
@@ -46,6 +48,8 @@ int	key_press_frame(int key_code)
 
 int	key_release_frame(int key_code)
 {
+	if (!global_player())
+		return (0);
 	if (key_code == KEY_W)
 		global_player()->move_up = 0;
 	if (key_code == KEY_A)
