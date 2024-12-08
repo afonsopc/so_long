@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:31:11 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 16:18:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:34:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,24 @@ void	object_list_append(t_object_list **head, t_object_list *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+}
+
+void	object_list_remove(t_object_list **head, t_object_list *remove)
+{
+	t_object_list	*tmp;
+
+	if (!remove || !head || !*head)
+		return ;
+	if (*head == remove)
+	{
+		*head = remove->next;
+		return ;
+	}
+	tmp = *head;
+	while (tmp->next && tmp->next != remove)
+		tmp = tmp->next;
+	if (tmp->next)
+		tmp->next = remove->next;
 }
 
 void	free_object_list(t_object_list *object_list)

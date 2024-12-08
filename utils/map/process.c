@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 16:58:29 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:04:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ int	parse_map_file(int fd)
 	}
 	if (!last_checks(&parse))
 		return (free_parse(&parse), 0);
+	if (!resize_window(parse.len * SPRITE_WIDTH, parse.y * SPRITE_HEIGHT) || !init_canvas(parse.len * SPRITE_WIDTH, parse.y * SPRITE_HEIGHT))
+		return (free_parse(&parse), free_mlx(global_mlx()), 0);
 	return (1);
 }

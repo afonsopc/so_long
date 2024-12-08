@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mlx.c                                           :+:      :+:    :+:   */
+/*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/04 19:25:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:03:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ t_mlx	*global_mlx(void)
 	return (*get_global_mlx());
 }
 
-void	free_mlx(void)
+void	free_mlx(t_mlx *mlx)
 {
-	mlx_destroy_window(global_mlx()->mlx, global_mlx()->win);
-	mlx_destroy_display(global_mlx()->mlx);
-	free(global_mlx());
+	mlx_destroy_window(mlx->mlx, mlx->win);
+	mlx_destroy_display(mlx->mlx);
+	free(mlx);
 }
 
-int	init_mlx(void)
+int	init_mlx(int width, int height)
 {
 	t_mlx	**mlx_ptr;
 	t_mlx	*mlx;
@@ -44,7 +44,20 @@ int	init_mlx(void)
 	mlx->mlx = mlx_init();
 	if (!(mlx->mlx))
 		return (free(mlx), 0);
-	mlx->win = mlx_new_window(mlx->mlx, W_WIDTH, W_HEIGHT, "So Long!");
+	mlx->win = mlx_new_window(mlx->mlx, width, height, "So Long!");
+	if (!(mlx->win))
+		return (mlx_destroy_display(mlx->mlx), free(mlx), 0);
+	return (1);
+}
+
+int	resize_window(int width, int height)
+{
+	t_mlx	*mlx;
+
+	mlx = global_mlx();
+	mlx_clear_window(mlx->mlx, mlx->win);
+	mlx_destroy_window(mlx->mlx, mlx->win);
+	mlx->win = mlx_new_window(mlx->mlx, width, height, "So Long!");
 	if (!(mlx->win))
 		return (mlx_destroy_display(mlx->mlx), free(mlx), 0);
 	return (1);

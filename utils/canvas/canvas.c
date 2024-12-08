@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 16:05:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:57:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "canvas.h"
 
-int	init_canvas(void)
+int	init_canvas(int width, int height)
 {
 	t_image	**canvas_ptr;
 	t_image	*canvas;
@@ -23,8 +23,8 @@ int	init_canvas(void)
 	if (!*canvas_ptr)
 		return (0);
 	canvas = *canvas_ptr;
-	canvas->width = W_WIDTH;
-	canvas->height = W_HEIGHT;
+	canvas->width = width;
+	canvas->height = height;
 	canvas_img = mlx_new_image(global_mlx()->mlx,
 			canvas->width, canvas->height);
 	if (!canvas_img)

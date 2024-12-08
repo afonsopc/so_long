@@ -6,11 +6,19 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:24:56 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 17:00:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:51:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
+
+int	x_y_intercepts(int x1, int y1, int x2, int y2)
+{
+	return (x1 < x2 + SPRITE_WIDTH
+		&& x1 + SPRITE_WIDTH > x2
+		&& y1 < y2 + SPRITE_HEIGHT
+		&& y1 + SPRITE_HEIGHT > y2);
+}
 
 int	check_wall_collision(int new_x, int new_y)
 {
@@ -19,15 +27,35 @@ int	check_wall_collision(int new_x, int new_y)
 	curr = *global_object_list();
 	while (curr)
 	{
-		if (curr->object->entity->type == 2
-			&& new_x < curr->object->entity->x + SPRITE_WIDTH
-			&& new_x + SPRITE_WIDTH > curr->object->entity->x
-			&& new_y < curr->object->entity->y + SPRITE_HEIGHT
-			&& new_y + SPRITE_HEIGHT > curr->object->entity->y)
+		if (curr->object->entity->type == 2 && x_y_intercepts(new_x, new_y,
+				curr->object->entity->x, curr->object->entity->y))
 			return (0);
 		curr = curr->next;
 	}
 	return (1);
+}
+
+void	process_other_collisions(t_player	*player)
+{
+	t_object_list	*curr;
+
+	curr = *global_object_list();
+	while (curr)
+	{
+		if (curr->object->entity->type == 3 && x_y_intercepts(player->entity->x,
+				player->entity->y, curr->object->entity->x,
+				curr->object->entity->y))
+		{
+			global_player()->points++;
+			object_list_remove(global_object_list(), curr);
+			curr->object->entity->free((void *)curr->object);
+		}
+		else if (curr->object->entity->type == 4 && x_y_intercepts(player->entity->x,
+				player->entity->y, curr->object->entity->x,
+				curr->object->entity->y))
+			exit_game();
+		curr = curr->next;
+	}
 }
 
 void	player_move(void *_this)
@@ -49,6 +77,7 @@ void	player_move(void *_this)
 		this->entity->x -= s;
 	if (this->move_right && check_wall_collision(x + s, y))
 		this->entity->x += s;
+	process_other_collisions(this);
 }
 
 t_sprite	*player_get_sprite(void *_this)

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 15:55:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:09:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	init_player(int x, int y)
 	player->move_left = 0;
 	player->move_right = 0;
 	player->points = 0;
-	player->speed = 2;
+	player->speed = 5;
 	return (1);
 }

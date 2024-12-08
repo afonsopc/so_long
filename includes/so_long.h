@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 17:00:19 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:09:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 
 # ifndef W_HEIGHT
 #  define W_HEIGHT 500
+# endif
+
+# ifndef KEY_ESC
+#  define KEY_ESC 65307
 # endif
 
 # ifndef KEY_W
@@ -131,11 +135,15 @@ void			clear_canvas(void);
 t_object_list	*object_list_new(t_object *object);
 void			object_list_append(t_object_list **head, t_object_list *new);
 int				process_map(char *path);
+void			object_list_remove(t_object_list **head, t_object_list *remove);
+int				resize_window(int width, int height);
 
 void			free_sprites(t_sprite *sprite);
 void			free_image(t_image	*image);
-void			free_mlx(void);
+void			free_mlx(t_mlx *mlx);
 void			free_object_list(t_object_list *object_list);
+
+int				exit_game(void);
 
 t_image			*global_canvas(void);
 t_player		*global_player(void);
@@ -148,9 +156,9 @@ t_wall			*wall_new(int x, int y);
 t_food			*food_new(int x, int y);
 t_exit_place	*exit_place_new(int x, int y);
 
-int				init_canvas(void);
+int				init_canvas(int width, int height);
 int				init_player(int x, int y);
-int				init_mlx(void);
+int				init_mlx(int width, int height);
 
 unsigned int	get_pixel(t_image *image, int x, int y);
 void			put_pixel(t_image *image, int x, int y, unsigned int color);

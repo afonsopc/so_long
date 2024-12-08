@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:06:12 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 16:17:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:09:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	key_press_frame(int key_code)
 		global_player()->move_down = 1;
 	if (key_code == KEY_D)
 		global_player()->move_right = 1;
+	if (key_code == KEY_ESC)
+		exit_game();
 	return (0);
 }
 
