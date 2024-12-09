@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:50:48 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 20:13:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/09 23:29:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ void	free_parse(t_map_parse *parse)
 	free_object_list(*global_object_list());
 }
 
+int	final_checks(t_map_parse *parse)
+{
+	return (check_exit(parse) && last_checks(parse)
+		&& resize_window(parse->len * SPRITE_WIDTH, parse->y * SPRITE_HEIGHT)
+		&& init_canvas(parse->len * SPRITE_WIDTH, parse->y * SPRITE_HEIGHT));
+}
+
 int	parse_map_file(int fd, char *path)
 {
 	t_map_parse	parse;
@@ -55,9 +62,7 @@ int	parse_map_file(int fd, char *path)
 		free(parse.prev_line);
 		parse.prev_line = parse.line;
 	}
-	if (!check_exit(&parse) || !last_checks(&parse)
-		|| !resize_window(parse.len * SPRITE_WIDTH, parse.y * SPRITE_HEIGHT)
-		|| !init_canvas(parse.len * SPRITE_WIDTH, parse.y * SPRITE_HEIGHT))
+	if (!final_checks(&parse))
 		return (free_parse(&parse), 0);
 	return (free(parse.line), free(parse.prev_line), 1);
 }

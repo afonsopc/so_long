@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:06:12 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 20:09:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/09 23:22:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ void	move_objects(t_object_list *object_list)
 	}
 }
 
+void	put_moviment_count(void)
+{
+	char	*number;
+
+	number = ft_itoa(global_player()->moviment_count);
+	if (!number)
+		(ft_error("ITOA issue"), exit_game());
+	mlx_set_font(global_mlx()->mlx, global_mlx()->win, "9x15bold");
+	mlx_string_put(global_mlx()->mlx, global_mlx()->win, 50, 50,
+		0, "Moviment count: ");
+	mlx_string_put(global_mlx()->mlx, global_mlx()->win, 200, 50,
+		0, number);
+	free(number);
+}
+
 int	frame(void)
 {
 	clear_canvas();
@@ -28,6 +43,7 @@ int	frame(void)
 	move_objects(*global_object_list());
 	mlx_put_image_to_window(global_mlx()->mlx, global_mlx()->win,
 		global_canvas()->image, 0, 0);
+	put_moviment_count();
 	return (0);
 }
 

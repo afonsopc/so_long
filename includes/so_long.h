@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 20:09:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:38:16 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/time.h>
 # include <fcntl.h>
 # include "mlx.h"
 
@@ -89,15 +88,18 @@ typedef struct s_entity
 
 typedef struct s_player
 {
-	t_entity		*entity;
-	t_sprite		*sprite;
-	int				speed;
-	int				move_up;
-	int				move_down;
-	int				move_left;
-	int				move_right;
-	int				points;
-	struct timeval	last_sprite_change;
+	t_entity	*entity;
+	t_sprite	*sprite;
+	int			speed;
+	int			move_up;
+	int			move_down;
+	int			move_left;
+	int			move_right;
+	int			sprite_change_delay;
+	int			moviment_count;
+	int			points;
+	time_t		last_move_timestamp;
+	time_t		last_sprite_change_timestamp;
 }	t_player;
 
 typedef struct s_wall
@@ -137,6 +139,7 @@ t_object_list	*object_list_new(t_object *object);
 void			object_list_append(t_object_list **head, t_object_list *new);
 int				process_map(char *path);
 int				resize_window(int width, int height);
+time_t			get_time(void);
 
 void			free_sprites(t_sprite *sprite);
 void			free_image(t_image	*image);

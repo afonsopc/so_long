@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 20:03:34 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:45:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,12 @@ void	free_mlx(t_mlx *mlx)
 
 int	init_mlx(int width, int height)
 {
-	t_mlx	**mlx_ptr;
 	t_mlx	*mlx;
 
-	mlx_ptr = get_global_mlx();
-	*mlx_ptr = malloc(sizeof(t_mlx));
-	if (!*mlx_ptr)
+	*get_global_mlx() = malloc(sizeof(t_mlx));
+	if (!*get_global_mlx())
 		return (0);
-	mlx = *mlx_ptr;
+	mlx = *get_global_mlx();
 	mlx->mlx = mlx_init();
 	if (!(mlx->mlx))
 		return (free(mlx), 0);

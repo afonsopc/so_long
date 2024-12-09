@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 23:56:49 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 22:39:40 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/09 20:27:16 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/09 22:12:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "../includes/so_long.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
+time_t	get_time(void)
+{
+	static time_t	time;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
-int				ft_count_occurrences(char *str, char to_count);
-ssize_t			ft_putstr_fd(char *s, int fd);
-ssize_t			ft_strlen(const char *s);
-unsigned int	ft_abs(int n);
-char			*ft_gnl(int fd);
-void			ft_putnbr_fd(int n, int fd);
-char			*ft_itoa(int n);
-
-#endif
+	time += 5;
+	return (time);
+}

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 20:09:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:18:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	init_player_sprites(t_player *player)
 {
-	struct timeval	current_time;
 	t_sprite		*sprite;
 	t_sprite		*new_sprite;
 
@@ -26,9 +25,8 @@ int	init_player_sprites(t_player *player)
 		return (free(sprite), 0);
 	sprite_append(sprite, new_sprite);
 	sprite_append(sprite, sprite);
-	gettimeofday(&current_time, NULL);
 	player->sprite = sprite;
-	player->last_sprite_change = current_time;
+	player->last_sprite_change_timestamp = get_time();
 	return (1);
 }
 
@@ -40,19 +38,18 @@ void	free_player_ptr(t_player **player)
 
 int	init_player(int x, int y)
 {
-	t_player		**player_ptr;
 	t_player		*player;
 
-	player_ptr = get_global_player();
-	*player_ptr = malloc(sizeof(t_player));
-	if (!*player_ptr)
+	*get_global_player() = malloc(sizeof(t_player));
+	if (!*get_global_player())
 		return (0);
-	player = *player_ptr;
+	player = *get_global_player();
 	if (!init_player_sprites(player))
-		return (free_player_ptr(player_ptr), 0);
+		return (free_player_ptr(get_global_player()), 0);
 	player->entity = entity_new(x, y);
 	if (!player->entity)
-		return (free_sprites(player->sprite), free_player_ptr(player_ptr), 0);
+		return (free_sprites(player->sprite),
+			free_player_ptr(get_global_player()), 0);
 	player->entity->get_sprite = player_get_sprite;
 	player->entity->move = player_move;
 	player->entity->free = player_free;
@@ -63,5 +60,7 @@ int	init_player(int x, int y)
 	player->move_right = 0;
 	player->points = 0;
 	player->speed = 5;
+	player->moviment_count = 0;
+	player->sprite_change_delay = 250;
 	return (1);
 }
