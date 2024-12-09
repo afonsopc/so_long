@@ -82,6 +82,7 @@ typedef struct s_entity
 	t_sprite		*(*get_sprite)(void *this);
 	void			(*free)(void *this);
 	int				type;
+	int				active;
 	int				x;
 	int				y;
 }	t_entity;
@@ -135,7 +136,6 @@ void			clear_canvas(void);
 t_object_list	*object_list_new(t_object *object);
 void			object_list_append(t_object_list **head, t_object_list *new);
 int				process_map(char *path);
-void			object_list_remove(t_object_list **head, t_object_list *remove);
 int				resize_window(int width, int height);
 
 void			free_sprites(t_sprite *sprite);

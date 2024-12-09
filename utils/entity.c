@@ -43,5 +43,6 @@ t_entity	*entity_new(int x, int y)
 	entity->free = default_free;
 	entity->x = x;
 	entity->y = y;
+	entity->active = 1;
 	return (entity);
 }

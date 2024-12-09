@@ -23,5 +23,6 @@ int	process_map(char *path)
 		return (ft_error("Invalid map file"), 0);
 	if (!parse_map_file(fd))
 		return (0);
+	close(fd);
 	return (1);
 }

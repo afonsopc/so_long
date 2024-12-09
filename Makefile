@@ -20,7 +20,7 @@ all: $(NAME)
 
 $(NAME): $(OBJDIR) $(OBJS)
 	@echo "\nCompiling $(NAME)...\033[0m"
-	@cc $(CFLAGS) $(OBJS) -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -lm -framework OpenGL -framework AppKit -o $(NAME)
+	@cc $(CFLAGS) $(OBJS) -Lmlx -lmlx -lXext -lX11 -o $(NAME)
 
 $(OBJDIR)%.o: %.c
 	@printf "\033[1;33m.\033[0m"

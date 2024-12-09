@@ -28,6 +28,7 @@ void	free_mlx(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
+	free(mlx->mlx);
 	free(mlx);
 }
 
@@ -55,7 +56,6 @@ int	resize_window(int width, int height)
 	t_mlx	*mlx;
 
 	mlx = global_mlx();
-	mlx_clear_window(mlx->mlx, mlx->win);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx->win = mlx_new_window(mlx->mlx, width, height, "So Long!");
 	if (!(mlx->win))

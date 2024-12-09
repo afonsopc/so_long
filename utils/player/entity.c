@@ -42,13 +42,13 @@ void	process_other_collisions(t_player	*player)
 	curr = *global_object_list();
 	while (curr)
 	{
-		if (curr->object->entity->type == 3 && x_y_intercepts(player->entity->x,
+		if (curr->object->entity->type == 3 && curr->object->entity->active
+				&& x_y_intercepts(player->entity->x,
 				player->entity->y, curr->object->entity->x,
 				curr->object->entity->y))
 		{
 			global_player()->points++;
-			object_list_remove(global_object_list(), curr);
-			curr->object->entity->free((void *)curr->object);
+			curr->object->entity->active = 0;
 		}
 		else if (curr->object->entity->type == 4 && x_y_intercepts(player->entity->x,
 				player->entity->y, curr->object->entity->x,

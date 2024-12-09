@@ -58,5 +58,7 @@ int	parse_map_file(int fd)
 		return (free_parse(&parse), 0);
 	if (!resize_window(parse.len * SPRITE_WIDTH, parse.y * SPRITE_HEIGHT) || !init_canvas(parse.len * SPRITE_WIDTH, parse.y * SPRITE_HEIGHT))
 		return (free_parse(&parse), free_mlx(global_mlx()), 0);
+	free(parse.line);
+	free(parse.prev_line);
 	return (1);
 }

@@ -51,11 +51,12 @@ void	put_objects_in_canvas(t_object_list *object_list)
 {
 	while (object_list)
 	{
-		put_image(
-			object_list->object->entity
-			->get_sprite((void *)object_list->object)->image,
-			global_canvas(), object_list->object->entity->x,
-			object_list->object->entity->y);
+		if (object_list->object->entity->active)
+			put_image(
+				object_list->object->entity
+				->get_sprite((void *)object_list->object)->image,
+				global_canvas(), object_list->object->entity->x,
+				object_list->object->entity->y);
 		object_list = object_list->next;
 	}
 }
