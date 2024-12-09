@@ -20,7 +20,7 @@ ifeq ($(shell uname -s),Darwin)
 	MLX_COMPILE = echo "\033[1;32mNot compiling mlx...\033[0m"
     MLX_FLAGS = -Lmlx -lmlx_Darwin -L/usr/X11/lib -lXext -lX11 -lm -framework OpenGL -framework AppKit
 else
-	MLX_COMPILE = echo "\033[1;33mCompiling mlx...\033[0m"; tar -xf mlx_linux.tar; make -C minilibx-linux; cp minilibx-linux/libmlx.a mlx/; rm -rf minilibx-linux
+	MLX_COMPILE = echo "\033[1;33mCompiling mlx...\033[0m"; tar -xf minilibx-linux.tgz; make -C minilibx-linux; cp minilibx-linux/libmlx.a mlx/; rm -rf minilibx-linux
     MLX_FLAGS = -Lmlx -lmlx -lXext -lX11
 endif
 
@@ -48,7 +48,7 @@ clean:
 
 fclean: clean
 	@echo "\033[1;31mCleaning binaries...\033[0m"
-	@rm -f $(NAME) mlx/libmlx.a
+	@rm -rf $(NAME) mlx/libmlx.a minilibx-linux
 
 re: fclean all
 
