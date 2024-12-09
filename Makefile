@@ -3,7 +3,7 @@ SRC = main.c
 
 SRC += utils/player/player.c utils/player/entity.c utils/player/global.c
 SRC += utils/canvas/canvas.c utils/canvas/global.c
-SRC += utils/map/map.c utils/map/checks.c utils/map/process.c utils/map/generate.c
+SRC += utils/map/map.c utils/map/checks.c utils/map/process.c utils/map/generate.c utils/map/has_exit.c
 SRC += utils/error.c utils/mlx.c utils/image.c utils/sprite.c utils/entity.c
 SRC += utils/object_list.c utils/loop.c utils/wall.c utils/food.c utils/exit_place.c  utils/exit.c
 SRC += libft/ft_strlen.c libft/ft_putstr_fd.c libft/ft_abs.c libft/ft_gnl.c libft/ft_count_occurrences.c
