@@ -16,11 +16,25 @@ CFLAGS = -Wall -Wextra -Werror
 VPATH = utils:libft
 _MAP = 1.ber
 
+ifeq ($(shell uname -s),Darwin)
+	COMPILE_MLX = 0
+    MLX_FLAGS = -Lmlx -lmlx_Darwin -L/usr/X11/lib -lXext -lX11 -lm -framework OpenGL -framework AppKit
+else
+	COMPILE_MLX = 1
+    MLX_FLAGS = -Lmlx -lmlx -lXext -lX11
+endif
+
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(OBJS)
+$(NAME): mlx $(OBJDIR) $(OBJS)
 	@echo "\nCompiling $(NAME)...\033[0m"
-	@cc $(CFLAGS) $(OBJS) -Lmlx -lmlx -lXext -lX11 -o $(NAME)
+	@cc $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
+
+mlx:
+	ifeq ($(COMPILE_MLX), 1)
+		@echo "\033[1;33mCompiling mlx...\033[0m"
+		@make -C minilibx-linux
+		@cp minilibx-linux/libmlx.a mlx/
 
 $(OBJDIR)%.o: %.c
 	@printf "\033[1;33m.\033[0m"
