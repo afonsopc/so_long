@@ -17,10 +17,10 @@ VPATH = utils:libft
 _MAP = 1.ber
 
 ifeq ($(shell uname -s),Darwin)
-	COMPILE_MLX = 0
+	MLX_COMPILE = echo "\033[1;32mNot compiling mlx...\033[0m"
     MLX_FLAGS = -Lmlx -lmlx_Darwin -L/usr/X11/lib -lXext -lX11 -lm -framework OpenGL -framework AppKit
 else
-	COMPILE_MLX = 1
+	MLX_COMPILE = echo "\033[1;33mCompiling mlx...\033[0m"; make -C minilibx-linux; cp minilibx-linux/libmlx.a mlx/
     MLX_FLAGS = -Lmlx -lmlx -lXext -lX11
 endif
 
@@ -31,10 +31,7 @@ $(NAME): mlx $(OBJDIR) $(OBJS)
 	@cc $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
 
 mlx:
-	ifeq ($(COMPILE_MLX), 1)
-		@echo "\033[1;33mCompiling mlx...\033[0m"
-		@make -C minilibx-linux
-		@cp minilibx-linux/libmlx.a mlx/
+	@$(MLX_COMPILE)
 
 $(OBJDIR)%.o: %.c
 	@printf "\033[1;33m.\033[0m"
@@ -51,7 +48,7 @@ clean:
 
 fclean: clean
 	@echo "\033[1;31mCleaning binaries...\033[0m"
-	@rm -f $(NAME)
+	@rm -f $(NAME) mlx/libmlx.a
 
 re: fclean all
 
@@ -64,4 +61,4 @@ norm:
 	-@norminette
 	@mv includes/mlx.h.bak includes/mlx.h
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re mlx
