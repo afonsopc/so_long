@@ -59,7 +59,7 @@ int	init_player(int x, int y)
 	player->move_left = 0;
 	player->move_right = 0;
 	player->points = 0;
-	player->speed = 5;
+	player->speed = 2;
 	player->moviment_count = 0;
 	player->sprite_change_delay = 250;
 	return (1);

@@ -63,6 +63,7 @@ re: fclean all
 run: re
 	@echo "\033[1;32mRunning $(NAME)...\033[0m"
 	@./$(NAME) maps/$(MAP)
+	make fclean
 
 norm:
 	@mv includes/mlx.h includes/mlx.h.bak

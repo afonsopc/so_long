@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <aio.h>
 # include "mlx.h"
 
 # ifndef W_HEIGHT
