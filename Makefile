@@ -36,11 +36,11 @@ endif
 
 all: $(NAME)
 
-$(NAME): mlx $(OBJDIR) $(OBJS)
+$(NAME): mlx/libmlx.a $(OBJDIR) $(OBJS)
 	@echo "\nCompiling $(NAME)...\033[0m"
 	@cc $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
 
-mlx:
+mlx/libmlx.a:
 	@$(MLX_COMPILE)
 
 $(OBJDIR)%.o: %.c
