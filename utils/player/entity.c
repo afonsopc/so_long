@@ -42,8 +42,8 @@ int	get_speed(t_player *this)
 
 	speed = (this->speed) + ((get_time() - (this->last_move_timestamp)) / 4);
 	this->last_move_timestamp = get_time();
-	if (speed > SPRITE_WIDTH / 2)
-		return (SPRITE_WIDTH / 2);
+	if (speed > SPRITE_SIZE / 2)
+		return (SPRITE_SIZE / 2);
 	return (speed);
 }
 

@@ -49,12 +49,8 @@
 #  define W_WIDTH 1040
 # endif
 
-# ifndef SPRITE_WIDTH
-#  define SPRITE_WIDTH 40
-# endif
-
-# ifndef SPRITE_HEIGHT
-#  define SPRITE_HEIGHT 40
+# ifndef SPRITE_SIZE
+#  define SPRITE_SIZE 40
 # endif
 
 typedef struct s_mlx

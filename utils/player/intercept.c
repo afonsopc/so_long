@@ -14,8 +14,8 @@
 
 int	x_y_intercepts(int x1, int y1, int x2, int y2)
 {
-	return (x1 < x2 + SPRITE_WIDTH
-		&& x1 + SPRITE_WIDTH > x2
-		&& y1 < y2 + SPRITE_HEIGHT
-		&& y1 + SPRITE_HEIGHT > y2);
+	return (x1 < x2 + SPRITE_SIZE
+		&& x1 + SPRITE_SIZE > x2
+		&& y1 < y2 + SPRITE_SIZE
+		&& y1 + SPRITE_SIZE > y2);
 }

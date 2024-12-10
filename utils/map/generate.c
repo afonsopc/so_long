@@ -16,18 +16,18 @@ t_object	*get_object_from_char(char c, int x, int y)
 {
 	t_object	*obj;
 
-	if (c == 'P' && init_player(x * SPRITE_WIDTH,
-			y * SPRITE_HEIGHT))
+	if (c == 'P' && init_player(x * SPRITE_SIZE,
+			y * SPRITE_SIZE))
 		obj = (t_object *)global_player();
 	else if (c == '1')
-		obj = (t_object *)wall_new(x * SPRITE_WIDTH,
-				y * SPRITE_HEIGHT);
+		obj = (t_object *)wall_new(x * SPRITE_SIZE,
+				y * SPRITE_SIZE);
 	else if (c == 'C')
-		obj = (t_object *)food_new(x * SPRITE_WIDTH,
-				y * SPRITE_HEIGHT);
+		obj = (t_object *)food_new(x * SPRITE_SIZE,
+				y * SPRITE_SIZE);
 	else if (c == 'E')
-		obj = (t_object *)exit_place_new(x * SPRITE_WIDTH,
-				y * SPRITE_HEIGHT);
+		obj = (t_object *)exit_place_new(x * SPRITE_SIZE,
+				y * SPRITE_SIZE);
 	else
 		obj = NULL;
 	return (obj);

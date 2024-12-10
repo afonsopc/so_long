@@ -35,8 +35,8 @@ void	free_parse(t_map_parse *parse)
 int	final_checks(t_map_parse *parse)
 {
 	return (check_exit(parse) && last_checks(parse)
-		&& resize_window(parse->len * SPRITE_WIDTH, parse->y * SPRITE_HEIGHT)
-		&& init_canvas(parse->len * SPRITE_WIDTH, parse->y * SPRITE_HEIGHT));
+		&& resize_window(parse->len * SPRITE_SIZE, parse->y * SPRITE_SIZE)
+		&& init_canvas(parse->len * SPRITE_SIZE, parse->y * SPRITE_SIZE));
 }
 
 int	parse_map_file(int fd, char *path)
