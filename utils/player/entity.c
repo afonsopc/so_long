@@ -36,9 +36,15 @@ void	process_other_collisions(t_player	*player)
 	}
 }
 
-void	print_moviment_count(t_player *this)
+int	get_speed(t_player *this)
 {
-	this->moviment_count++;
+	int	speed;
+
+	speed = (this->speed) + ((get_time() - (this->last_move_timestamp)) / 4);
+	this->last_move_timestamp = get_time();
+	if (speed > SPRITE_WIDTH / 2)
+		return (SPRITE_WIDTH / 2);
+	return (speed);
 }
 
 void	player_move(void *_this)
@@ -51,8 +57,7 @@ void	player_move(void *_this)
 	this = (t_player *)_this;
 	x = this->entity->x;
 	y = this->entity->y;
-	s = this->speed + ((get_time() - this->last_move_timestamp) / 2);
-	this->last_move_timestamp = get_time();
+	s = get_speed(this);
 	if (this->move_up)
 		y -= s;
 	if (this->move_down)
@@ -79,9 +84,7 @@ t_sprite	*player_get_sprite(void *_this)
 	if (!this->sprite)
 		return (NULL);
 	sprite = this->sprite;
-	if ((this->move_down || this->move_left
-			|| this->move_right || this->move_up)
-		&& get_time() - this->last_sprite_change_timestamp
+	if (get_time() - this->last_sprite_change_timestamp
 		>= this->sprite_change_delay)
 	{
 		this->sprite = sprite->next;

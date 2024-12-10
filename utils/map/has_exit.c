@@ -97,6 +97,7 @@ int	check_exit(t_map_parse *parse)
 	strs.str1[0] = NULL;
 	while (check_exit_loop(fd, &x_y, &strs))
 		;
+	close(fd);
 	x_y.x = ft_strlen(strs.str1[0]);
 	if (!has_exit(strs.str1, &x_y))
 		return (ft_error("Doesnt have path to exit"), free_two_strs(&strs), 0);

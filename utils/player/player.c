@@ -40,7 +40,7 @@ int	init_player(int x, int y)
 {
 	t_player		*player;
 
-	*get_global_player() = malloc(sizeof(t_player));
+	*get_global_player() = ft_calloc(1, sizeof(t_player));
 	if (!*get_global_player())
 		return (0);
 	player = *get_global_player();
@@ -54,13 +54,8 @@ int	init_player(int x, int y)
 	player->entity->move = player_move;
 	player->entity->free = player_free;
 	player->entity->type = 1;
-	player->move_up = 0;
-	player->move_down = 0;
-	player->move_left = 0;
-	player->move_right = 0;
-	player->points = 0;
-	player->speed = 2;
-	player->moviment_count = 0;
+	player->speed = 1;
 	player->sprite_change_delay = 250;
+	player->last_move_timestamp = get_time();
 	return (1);
 }

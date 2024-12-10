@@ -43,7 +43,7 @@ void	clear_canvas(void)
 	{
 		x = -1;
 		while (++x <= global_canvas()->width)
-			put_pixel(global_canvas(), x, y, 0xDDDDDD);
+			put_pixel(global_canvas(), x, y, 0x888888);
 	}
 }
 

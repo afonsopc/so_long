@@ -38,5 +38,6 @@ void		player_free(void *_this);
 t_player	**get_global_player(void);
 int			x_y_intercepts(int x1, int y1, int x2, int y2);
 void		process_wall_collision(int *x, int *y);
+void		print_moviment_count(t_player *this);
 
 #endif

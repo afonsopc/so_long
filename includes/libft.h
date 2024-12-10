@@ -28,5 +28,7 @@ unsigned int	ft_abs(int n);
 char			*ft_gnl(int fd);
 void			ft_putnbr_fd(int n, int fd);
 char			*ft_itoa(int n);
+void			*ft_calloc(size_t count, size_t size);
+void			ft_bzero(void *s, size_t n);
 
 #endif

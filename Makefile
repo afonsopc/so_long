@@ -3,12 +3,14 @@ SRC = main.c
 
 BONUS=0
 
-SRC += utils/player/player.c utils/player/entity.c utils/player/global.c utils/player/intercept.c utils/player/wall_collision.c
+SRC += utils/player/player.c utils/player/entity.c utils/player/moviment_count.c 
+SRC += utils/player/global.c utils/player/intercept.c utils/player/wall_collision.c
 SRC += utils/canvas/canvas.c utils/canvas/global.c
 SRC += utils/map/map.c utils/map/checks.c utils/map/process.c utils/map/generate.c utils/map/has_exit.c
 SRC += utils/error.c utils/mlx.c utils/image.c utils/sprite.c utils/entity.c
 SRC += utils/object_list.c utils/loop.c utils/wall.c utils/food.c utils/exit_place.c utils/exit.c
-SRC += libft/ft_strlen.c libft/ft_putstr_fd.c libft/ft_abs.c libft/ft_gnl.c libft/ft_count_occurrences.c libft/ft_putnbr_fd.c libft/ft_itoa.c
+SRC += libft/ft_strlen.c libft/ft_putstr_fd.c libft/ft_abs.c libft/ft_gnl.c libft/ft_bzero.c
+SRC += libft/ft_count_occurrences.c libft/ft_putnbr_fd.c libft/ft_itoa.c libft/ft_calloc.c
 
 OBJDIR = objs/
 OBJ = $(SRC:.c=.o)
@@ -16,7 +18,7 @@ OBJS = $(addprefix $(OBJDIR), $(OBJ))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 VPATH = utils:libft
-MAP = 1.ber
+MAPS = 4.ber 1.ber 2.ber 3.ber
 
 ifeq ($(BONUS),1)
 	SRC += bonus/time.c
@@ -60,9 +62,11 @@ fclean: clean
 
 re: fclean all
 
-run: re
+%.ber:
+	-@./$(NAME) maps/$@
+
+run: re $(MAPS)
 	@echo "\033[1;32mRunning $(NAME)...\033[0m"
-	@./$(NAME) maps/$(MAP)
 	make fclean
 
 norm:

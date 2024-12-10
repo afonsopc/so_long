@@ -50,11 +50,11 @@
 # endif
 
 # ifndef SPRITE_WIDTH
-#  define SPRITE_WIDTH 80
+#  define SPRITE_WIDTH 40
 # endif
 
 # ifndef SPRITE_HEIGHT
-#  define SPRITE_HEIGHT 80
+#  define SPRITE_HEIGHT 40
 # endif
 
 typedef struct s_mlx

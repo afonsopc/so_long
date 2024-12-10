@@ -29,10 +29,10 @@ void	put_moviment_count(void)
 	if (!number)
 		(ft_error("ITOA issue"), exit_game());
 	mlx_set_font(global_mlx()->mlx, global_mlx()->win, "9x15bold");
-	mlx_string_put(global_mlx()->mlx, global_mlx()->win, 50, 50,
-		0, "Moviment count: ");
-	mlx_string_put(global_mlx()->mlx, global_mlx()->win, 200, 50,
-		0, number);
+	mlx_string_put(global_mlx()->mlx, global_mlx()->win, 10, 20,
+		0xFFFFFF, "Moviment count: ");
+	mlx_string_put(global_mlx()->mlx, global_mlx()->win, 150, 20,
+		0xFFFFFF, number);
 	free(number);
 }
 
