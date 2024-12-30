@@ -9,7 +9,7 @@ SRC += utils/player/sprites.c utils/player/get_sprite.c
 SRC += utils/canvas/canvas.c utils/canvas/global.c
 SRC += utils/map/map.c utils/map/checks.c utils/map/process.c
 SRC += utils/map/generate.c utils/map/has_exit.c utils/map/still_has_food.c
-SRC += utils/error.c utils/mlx.c utils/image.c utils/sprite.c utils/entity.c
+SRC += utils/error.c utils/mlx.c utils/image.c utils/sprite.c utils/entity.c utils/creature.c
 SRC += utils/object_list.c utils/loop.c utils/wall.c utils/food.c utils/exit_place.c utils/exit.c
 SRC += libft/ft_strlen.c libft/ft_putstr_fd.c libft/ft_abs.c libft/ft_gnl.c libft/ft_bzero.c
 SRC += libft/ft_count_occurrences.c libft/ft_putnbr_fd.c libft/ft_itoa.c libft/ft_calloc.c
@@ -19,8 +19,17 @@ OBJDIR = objs/
 OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJDIR), $(OBJ))
 CC = emcc
-CFLAGS = -Wall -Wextra -Werror -I$(EMSCRIPTEN)/system/include/SDL2 -I$(EMSCRIPTEN)/system/include -I/opt/homebrew/Cellar/sdl2/2.30.10/include/SDL2 -I/opt/homebrew/Cellar/sdl2/2.30.10/include -I/opt/homebrew/Cellar/sdl2_image/2.8.4/include
-LDFLAGS = --shell-file minimal.html -s NO_EXIT_RUNTIME=1 -s DISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1 -s SAFE_HEAP=1 -s ASSERTIONS=1 -s ENVIRONMENT="web" -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file maps --preload-file assets
+INCLUDES = -I/usr/include/aarch64-linux-gnu -I/usr/include -I/usr/include/x86_64-linux-gnu
+INCLUDES += -I/opt/homebrew/Cellar/sdl2/2.30.10/include/SDL2 -I/opt/homebrew/Cellar/sdl2/2.30.10/include
+INCLUDES += -I/opt/homebrew/Cellar/sdl2_image/2.8.4/include -I/usr/include/x86_64-linux-gnu
+CFLAGS = -O3 -Wall -Wextra -Werror $(INCLUDES)
+LDFLAGS = -s USE_SDL=2 -s USE_SDL_IMAGE=2
+LDFLAGS += --shell-file minimal.html
+LDFLAGS += -s SDL2_IMAGE_FORMATS='["png"]'
+LDFLAGS += -s ALLOW_MEMORY_GROWTH
+LDFLAGS += --preload-file maps --preload-file assets
+# debug flags
+LDFLAGS += -s ASSERTIONS=1 -s SAFE_HEAP=1 -s STACK_OVERFLOW_CHECK=2
 VPATH = utils:libft
 MAPS = 4.ber 1.ber 2.ber 3.ber
 

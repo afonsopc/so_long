@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:24:56 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 03:09:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:54:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,15 @@ int	get_speed(t_player *this)
 {
 	int	speed;
 
-	speed = (this->speed) + ((get_time() - (this->last_move_timestamp)) / 4);
+	if (count_type_in_object_list(*global_object_list(), 5) != 0)
+		return (0);
+	speed = (this->speed)
+		+ ((get_time() - (this->last_move_timestamp)) / FRAME_TIME);
 	this->last_move_timestamp = get_time();
 	if (speed > SPRITE_SIZE / 2)
 		return (SPRITE_SIZE / 2);
+	if (this->sprinting)
+		speed *= 2;
 	return (speed);
 }
 

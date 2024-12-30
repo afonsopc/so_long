@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:56:44 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 02:38:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:40:34 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ t_object	*get_object_from_char(char c, int x, int y)
 				y * SPRITE_SIZE);
 	else if (c == 'E')
 		obj = (t_object *)exit_place_new(x * SPRITE_SIZE,
+				y * SPRITE_SIZE);
+	else if (c == 'p')
+		obj = (t_object *)creature_new(x * SPRITE_SIZE,
 				y * SPRITE_SIZE);
 	else
 		obj = NULL;

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 00:30:32 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:53:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	free_sprites(t_sprite *sprite)
 			break ;
 		first = 0;
 		next = curr->next;
+		curr->next = NULL;
 		free_sprite(curr);
 		curr = next;
 	}

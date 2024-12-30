@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 03:13:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:55:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "mlx.h"
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_image.h>
-#include <emscripten/emscripten.h>
+# include <emscripten/emscripten.h>
+
+# ifndef FRAME_TIME
+#  define FRAME_TIME 16.67
+# endif
 
 # ifndef W_HEIGHT
 #  define W_HEIGHT 500
 # endif
 
 # ifndef KEY_ESC
-#  define KEY_ESC 65307
+#  define KEY_ESC 27
 # endif
 
 # ifndef KEY_W
@@ -45,6 +48,10 @@
 
 # ifndef KEY_D
 #  define KEY_D 100
+# endif
+
+# ifndef KEY_SHIFT
+#  define KEY_SHIFT 1073742049
 # endif
 
 # ifndef W_WIDTH
@@ -106,6 +113,7 @@ typedef struct s_player
 	int					sprite_change_delay;
 	int					moviment_count;
 	int					sprite_state;
+	int					sprinting;
 	t_sprite_direction	sprite_direction;
 	int					points;
 	time_t				last_move_timestamp;
@@ -123,6 +131,17 @@ typedef struct s_food
 	t_entity		*entity;
 	t_sprite		*sprite;
 }	t_food;
+
+typedef struct s_creature
+{
+	t_entity		*entity;
+	t_sprite		*sprite;
+	time_t			created_at;
+	time_t			last_sprite_change_timestamp;
+	time_t			runaway_delay;
+	int				sprite_state;
+	int				sprite_change_delay;
+}	t_creature;
 
 typedef struct s_exit_place
 {
@@ -169,6 +188,7 @@ t_entity		*entity_new(int x, int y);
 t_wall			*wall_new(int x, int y);
 t_food			*food_new(int x, int y);
 t_exit_place	*exit_place_new(int x, int y);
+t_creature		*creature_new(int x, int y);
 
 int				init_canvas(int width, int height);
 int				init_player(int x, int y);

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:57:37 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 02:35:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:40:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	checks_1(t_map_parse *parse)
 	{
 		if (parse->line[i] != '1' && parse->line[i] != '0'
 			&& parse->line[i] != 'P' && parse->line[i] != 'E'
-			&& parse->line[i] != 'C' && parse->line[i] != 'R')
+			&& parse->line[i] != 'C' && parse->line[i] != 'R'
+			&& parse->line[i] != 'p')
 			return (ft_error("Invalid character in map"), 0);
 		if (parse->line[i] == 'P')
 			parse->starting_positions++;

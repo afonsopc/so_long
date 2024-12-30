@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:11:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 01:44:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:43:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	process_next_map(void)
 	free(tmp);
 	if (!path)
 		return (0);
-	printf("Processing map %s\n", path);
 	if (!process_map(path))
 		return (free(path), 0);
 	map++;
@@ -54,11 +53,8 @@ void	game_loop(void)
 	}
 	if (global_mlx()->over)
 	{
-		printf("Freeing object list\n");
 		free_object_list(*global_object_list());
-		printf("Resetting over\n");
 		global_mlx()->over = 0;
-		printf("Processing next map\n");
 		if (!process_next_map())
 			return (ft_error("Map process"), exit_game());
 	}
@@ -69,5 +65,5 @@ int	main(void)
 {
 	if (!init_mlx(W_WIDTH, W_HEIGHT))
 		return (ft_error("Mlx init"));
-	emscripten_set_main_loop(game_loop, 0, 1);
+	emscripten_set_main_loop(game_loop, FRAME_TIME * 2.778, 1);
 }
