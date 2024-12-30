@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 23:56:49 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 22:39:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 01:31:49 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ void			ft_putnbr_fd(int n, int fd);
 char			*ft_itoa(int n);
 void			*ft_calloc(size_t count, size_t size);
 void			ft_bzero(void *s, size_t n);
+size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char			*ft_strjoin(char const *s1, char const *s2);
+size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 #endif

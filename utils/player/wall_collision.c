@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 21:43:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 21:48:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 02:05:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,15 @@ void	process_wall_collision(int *x, int *y)
 	t_object_list		*curr;
 	t_wall_collision	wc;
 	t_push_direction	pd;
+	int					food_amount;
 
+	food_amount = count_type_in_object_list(*global_object_list(), 3);
 	curr = *global_object_list();
 	while (curr)
 	{
-		if (curr->object->entity->type == 2)
+		if (curr->object->entity->type == 2
+			|| (curr->object->entity->type == 4
+				&& global_player()->points != food_amount))
 		{
 			set_wall_collision(&wc, curr->object->entity->x,
 				curr->object->entity->y);

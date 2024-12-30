@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:50:59 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 23:29:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 02:15:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int	last_checks(t_map_parse *parse);
 int	checks_1(t_map_parse *parse);
 int	parse_map_file(int fd, char *path);
 int	check_exit(t_map_parse *parse);
+int	still_has_food(char **lines);
 
 #endif

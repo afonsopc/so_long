@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/29 23:37:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 01:29:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <aio.h>
 # include "mlx.h"
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_image.h>
+#include <emscripten/emscripten.h>
 
 # ifndef W_HEIGHT
 #  define W_HEIGHT 500
@@ -59,6 +59,7 @@ typedef struct s_mlx
 {
 	SDL_Renderer	*mlx;
 	void			*win;
+	int				over;
 }	t_mlx;
 
 typedef struct s_image
@@ -139,13 +140,14 @@ void			object_list_append(t_object_list **head, t_object_list *new);
 int				process_map(char *path);
 int				resize_window(int width, int height);
 time_t			get_time(void);
+int				count_type_in_object_list(t_object_list *object_list, int type);
 
 void			free_sprites(t_sprite *sprite);
 void			free_image(t_image	*image);
 void			free_mlx(t_mlx *mlx);
 void			free_object_list(t_object_list *object_list);
 
-int				exit_game(void);
+void			exit_game(void);
 
 t_image			*global_canvas(void);
 t_player		*global_player(void);

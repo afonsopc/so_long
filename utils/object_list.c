@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:31:11 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 19:34:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 02:03:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,19 @@ void	free_object_list(t_object_list *object_list)
 		free(object_list);
 		object_list = next;
 	}
+	*global_object_list() = NULL;
+}
+
+int	count_type_in_object_list(t_object_list *object_list, int type)
+{
+	int	count;
+
+	count = 0;
+	while (object_list)
+	{
+		if (object_list->object->entity->type == type)
+			count++;
+		object_list = object_list->next;
+	}
+	return (count);
 }

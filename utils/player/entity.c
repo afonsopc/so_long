@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:24:56 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 23:19:36 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 01:37:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	process_other_collisions(t_player	*player)
 {
 	t_object_list	*curr;
+	int				food_amount;
 
+	food_amount = count_type_in_object_list(*global_object_list(), 3);
 	curr = *global_object_list();
 	while (curr)
 	{
@@ -28,10 +30,11 @@ void	process_other_collisions(t_player	*player)
 			curr->object->entity->active = 0;
 		}
 		else if (curr->object->entity->type == 4
+			&& global_player()->points == food_amount
 			&& x_y_intercepts(player->entity->x,
 				player->entity->y, curr->object->entity->x,
 				curr->object->entity->y))
-			exit_game();
+			global_mlx()->over = 1;
 		curr = curr->next;
 	}
 }

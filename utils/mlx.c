@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/29 23:53:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 01:36:10 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ int	init_mlx(int width, int height)
 			SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 	if (!(mlx->win))
 		return (SDL_Quit(), free(mlx), 0);
-	mlx->mlx = SDL_CreateRenderer(mlx->win, -1, SDL_RENDERER_ACCELERATED);
+	mlx->mlx = SDL_CreateRenderer(mlx->win, -1, SDL_RENDERER_SOFTWARE);
 	if (!(mlx->mlx))
 		return (SDL_DestroyWindow(mlx->win), SDL_Quit(), free(mlx), 0);
+	global_mlx()->over = 1;
 	return (1);
 }
 

@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:22:05 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 20:11:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 02:22:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-int	process_contagious_around(char **lines, int *changed,
+int	process_contagious_around(char **lines, int *touched_exit,
 	t_x_and_y *x_y, t_x_and_y *size_x_y)
 {
 	if ((x_y->x > 0 && lines[x_y->y][x_y->x - 1] == 'P')
@@ -20,10 +20,13 @@ int	process_contagious_around(char **lines, int *changed,
 		|| (x_y->y > 0 && lines[x_y->y - 1][x_y->x] == 'P')
 		|| (x_y->y < size_x_y->y - 1 && lines[x_y->y + 1][x_y->x] == 'P'))
 	{
-		if (lines[x_y->y][x_y->x] == 'E')
-			return (1);
-		*changed = 1;
+		if ((x_y->x > 0 && lines[x_y->y][x_y->x - 1] == 'E')
+			|| (x_y->x < size_x_y->x - 1 && lines[x_y->y][x_y->x + 1] == 'E')
+			|| (x_y->y > 0 && lines[x_y->y - 1][x_y->x] == 'E')
+			|| (x_y->y < size_x_y->y - 1 && lines[x_y->y + 1][x_y->x] == 'E'))
+			*touched_exit = 1;
 		lines[x_y->y][x_y->x] = 'P';
+		return (1);
 	}
 	return (0);
 }
@@ -31,10 +34,12 @@ int	process_contagious_around(char **lines, int *changed,
 int	has_exit(char **lines, t_x_and_y *size_x_y)
 {
 	int			changed;
+	int			touched_exit;
 	t_x_and_y	x_y;
 
+	touched_exit = 0;
 	changed = 1;
-	while (changed)
+	while (changed > 0)
 	{
 		changed = 0;
 		x_y.y = -1;
@@ -43,14 +48,15 @@ int	has_exit(char **lines, t_x_and_y *size_x_y)
 			x_y.x = -1;
 			while (++x_y.x < size_x_y->x)
 			{
-				if (lines[x_y.y][x_y.x] != '0'
-					&& lines[x_y.y][x_y.x] != 'C' && lines[x_y.y][x_y.x] != 'E')
+				if (lines[x_y.y][x_y.x] != '0' && lines[x_y.y][x_y.x] != 'C')
 					continue ;
-				if (process_contagious_around(lines, &changed, &x_y, size_x_y))
-					return (1);
+				changed += process_contagious_around(lines,
+						&touched_exit, &x_y, size_x_y);
 			}
 		}
 	}
+	if (!still_has_food(lines) && touched_exit)
+		return (1);
 	return (0);
 }
 

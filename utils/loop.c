@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:06:12 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/29 23:51:18 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 01:21:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ int	frame(void)
 	texture = SDL_CreateTextureFromSurface(global_mlx()->mlx,
 			global_canvas()->image);
 	if (!texture)
-		return (fprintf(stderr, "SDL_CreateTextureFromSurface Error: %s\n",
-				SDL_GetError()), 0);
+		return (0);
 	SDL_RenderClear(global_mlx()->mlx);
 	SDL_RenderCopy(global_mlx()->mlx, texture, NULL, NULL);
 	SDL_RenderPresent(global_mlx()->mlx);
 	SDL_DestroyTexture(texture);
-	SDL_Delay(1000 / 60);
 	return (0);
 }
 
@@ -56,7 +54,7 @@ int	key_press_frame(int key_code)
 	if (key_code == KEY_D)
 		global_player()->move_right = 1;
 	if (key_code == KEY_ESC)
-		exit_game();
+		global_mlx()->over = 1;
 	return (0);
 }
 

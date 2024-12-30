@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 19:37:02 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 02:00:29 by afpachec         ###   ########.fr       */
+/*   Created: 2024/10/28 19:49:29 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/30 01:31:25 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/libft.h"
 
-void	exit_game(void)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	free_object_list(*global_object_list());
-	free_image(global_canvas());
-	free_mlx(global_mlx());
-	exit(0);
+	size_t	src_len;
+	size_t	i;
+
+	i = 0;
+	src_len = ft_strlen(src);
+	if (dstsize == 0)
+		return (src_len);
+	while (src[i] && i < dstsize - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (src_len);
 }

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:11:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/29 22:22:21 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 01:44:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,60 @@
 
 // return (write(1, "Hello from so_long :)\n", 22));
 
+int	process_next_map(void)
+{
+	static int	map;
+	char		*path;
+	char		*tmp;
+	char		*number;
+
+	number = ft_itoa(map);
+	if (!number)
+		return (0);
+	tmp = ft_strjoin("maps/", number);
+	free(number);
+	if (!tmp)
+		return (0);
+	path = ft_strjoin(tmp, ".ber");
+	free(tmp);
+	if (!path)
+		return (0);
+	printf("Processing map %s\n", path);
+	if (!process_map(path))
+		return (free(path), 0);
+	map++;
+	return (1);
+}
+
 void	game_loop(void)
 {
 	SDL_Event	event;
-	int			running;
 
-	running = 1;
-	while (running)
+	while (SDL_PollEvent(&event))
 	{
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-				running = 0;
-			else if (event.type == SDL_KEYDOWN)
-				key_press_frame(event.key.keysym.sym);
-			else if (event.type == SDL_KEYUP)
-				key_release_frame(event.key.keysym.sym);
-		}
-		frame();
-		SDL_RenderPresent(global_mlx()->mlx);
+		if (event.type == SDL_QUIT)
+			global_mlx()->over = 1;
+		else if (event.type == SDL_KEYDOWN)
+			key_press_frame(event.key.keysym.sym);
+		else if (event.type == SDL_KEYUP)
+			key_release_frame(event.key.keysym.sym);
 	}
-	exit_game();
+	if (global_mlx()->over)
+	{
+		printf("Freeing object list\n");
+		free_object_list(*global_object_list());
+		printf("Resetting over\n");
+		global_mlx()->over = 0;
+		printf("Processing next map\n");
+		if (!process_next_map())
+			return (ft_error("Map process"), exit_game());
+	}
+	frame();
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	if (argc != 2)
-		return (ft_error("Invalid number of arguments"));
 	if (!init_mlx(W_WIDTH, W_HEIGHT))
 		return (ft_error("Mlx init"));
-	if (!process_map(argv[1]))
-		return (free_mlx(global_mlx()), ft_error("Map load"));
-	game_loop();
+	emscripten_set_main_loop(game_loop, 0, 1);
 }
