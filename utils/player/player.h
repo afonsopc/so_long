@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:27:08 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 21:48:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 03:15:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ t_player	**get_global_player(void);
 int			x_y_intercepts(int x1, int y1, int x2, int y2);
 void		process_wall_collision(int *x, int *y);
 void		print_moviment_count(t_player *this);
+int			init_player_sprites(t_player *player);
+t_sprite	*get_player_sprite(t_player *player);
 
 #endif

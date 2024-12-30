@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 01:29:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 03:13:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct s_image
 
 typedef struct s_sprite
 {
-	t_image	*image;
-	void	*next;
+	t_image			*image;
+	struct s_sprite	*next;
 }	t_sprite;
 
 typedef struct s_entity
@@ -86,20 +86,30 @@ typedef struct s_entity
 	int				y;
 }	t_entity;
 
+typedef enum e_sprite_direction
+{
+	RIGHT,
+	LEFT,
+	UP,
+	DOWN
+}	t_sprite_direction;
+
 typedef struct s_player
 {
-	t_entity	*entity;
-	t_sprite	*sprite;
-	int			speed;
-	int			move_up;
-	int			move_down;
-	int			move_left;
-	int			move_right;
-	int			sprite_change_delay;
-	int			moviment_count;
-	int			points;
-	time_t		last_move_timestamp;
-	time_t		last_sprite_change_timestamp;
+	t_entity			*entity;
+	t_sprite			*sprite;
+	int					speed;
+	int					move_up;
+	int					move_down;
+	int					move_left;
+	int					move_right;
+	int					sprite_change_delay;
+	int					moviment_count;
+	int					sprite_state;
+	t_sprite_direction	sprite_direction;
+	int					points;
+	time_t				last_move_timestamp;
+	time_t				last_sprite_change_timestamp;
 }	t_player;
 
 typedef struct s_wall

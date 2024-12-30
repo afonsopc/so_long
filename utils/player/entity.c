@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 21:24:56 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 01:37:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 03:09:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ t_sprite	*player_get_sprite(void *_this)
 	this = (t_player *)_this;
 	if (!this->sprite)
 		return (NULL);
-	sprite = this->sprite;
+	sprite = get_player_sprite(this);
 	if (get_time() - this->last_sprite_change_timestamp
 		>= this->sprite_change_delay)
 	{
-		this->sprite = sprite->next;
+		this->sprite_state = !this->sprite_state;
 		this->last_sprite_change_timestamp = get_time();
 	}
 	return (sprite);

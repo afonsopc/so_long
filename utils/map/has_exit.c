@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:22:05 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 02:22:38 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 02:36:36 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	process_contagious_around(char **lines, int *touched_exit,
 			|| (x_y->x < size_x_y->x - 1 && lines[x_y->y][x_y->x + 1] == 'E')
 			|| (x_y->y > 0 && lines[x_y->y - 1][x_y->x] == 'E')
 			|| (x_y->y < size_x_y->y - 1 && lines[x_y->y + 1][x_y->x] == 'E'))
+			*touched_exit = 1;
+		if ((x_y->x > 0 && lines[x_y->y][x_y->x - 1] == 'R')
+			|| (x_y->x < size_x_y->x - 1 && lines[x_y->y][x_y->x + 1] == 'R')
+			|| (x_y->y > 0 && lines[x_y->y - 1][x_y->x] == 'R')
+			|| (x_y->y < size_x_y->y - 1 && lines[x_y->y + 1][x_y->x] == 'R'))
 			*touched_exit = 1;
 		lines[x_y->y][x_y->x] = 'P';
 		return (1);

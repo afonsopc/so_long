@@ -26,7 +26,7 @@ var ENVIRONMENT_IS_SHELL = false;
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpwcbzed7e.js
+// include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpwp13papq.js
 Module["expectedDataFileDownloads"] ??= 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -189,83 +189,111 @@ Module["expectedDataFileDownloads"]++;
       "start": 1298,
       "end": 3067
     }, {
-      "filename": "/assets/player_close.png",
+      "filename": "/assets/player_close_down.png",
       "start": 3067,
-      "end": 5036
+      "end": 5114
     }, {
-      "filename": "/assets/player_open.png",
-      "start": 5036,
-      "end": 7201
+      "filename": "/assets/player_close_left.png",
+      "start": 5114,
+      "end": 7098
+    }, {
+      "filename": "/assets/player_close_right.png",
+      "start": 7098,
+      "end": 9067
+    }, {
+      "filename": "/assets/player_close_up.png",
+      "start": 9067,
+      "end": 11134
+    }, {
+      "filename": "/assets/player_open_down.png",
+      "start": 11134,
+      "end": 13408
+    }, {
+      "filename": "/assets/player_open_left.png",
+      "start": 13408,
+      "end": 15586
+    }, {
+      "filename": "/assets/player_open_right.png",
+      "start": 15586,
+      "end": 17751
+    }, {
+      "filename": "/assets/player_open_up.png",
+      "start": 17751,
+      "end": 20035
     }, {
       "filename": "/assets/pt.png",
-      "start": 7201,
-      "end": 11727
+      "start": 20035,
+      "end": 24561
     }, {
       "filename": "/assets/wall.png",
-      "start": 11727,
-      "end": 13817
+      "start": 24561,
+      "end": 26651
     }, {
       "filename": "/maps/0.ber",
-      "start": 13817,
-      "end": 13851
+      "start": 26651,
+      "end": 26685
     }, {
       "filename": "/maps/1.ber",
-      "start": 13851,
-      "end": 13920
+      "start": 26685,
+      "end": 26754
+    }, {
+      "filename": "/maps/10.ber",
+      "start": 26754,
+      "end": 27094
     }, {
       "filename": "/maps/2.ber",
-      "start": 13920,
-      "end": 14129
+      "start": 27094,
+      "end": 27303
     }, {
       "filename": "/maps/3.ber",
-      "start": 14129,
-      "end": 14194
+      "start": 27303,
+      "end": 27368
     }, {
       "filename": "/maps/4.ber",
-      "start": 14194,
-      "end": 14321
+      "start": 27368,
+      "end": 27495
     }, {
       "filename": "/maps/5.ber",
-      "start": 14321,
-      "end": 14390
+      "start": 27495,
+      "end": 27564
     }, {
       "filename": "/maps/6.ber",
-      "start": 14390,
-      "end": 14480
+      "start": 27564,
+      "end": 27654
     }, {
       "filename": "/maps/7.ber",
-      "start": 14480,
-      "end": 14577
+      "start": 27654,
+      "end": 27751
     }, {
       "filename": "/maps/8.ber",
-      "start": 14577,
-      "end": 14681
+      "start": 27751,
+      "end": 27855
     }, {
       "filename": "/maps/9.ber",
-      "start": 14681,
-      "end": 14851
+      "start": 27855,
+      "end": 28025
     } ],
-    "remote_package_size": 14851
+    "remote_package_size": 28025
   });
 })();
 
-// end include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpwcbzed7e.js
-// include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpp1ny0oke.js
+// end include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpwp13papq.js
+// include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpc0hahhew.js
 // All the pre-js content up to here must remain later on, we need to run
 // it.
 if (Module["$ww"] || (typeof ENVIRONMENT_IS_PTHREAD != "undefined" && ENVIRONMENT_IS_PTHREAD)) Module["preRun"] = [];
 
 var necessaryPreJSTasks = Module["preRun"].slice();
 
-// end include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpp1ny0oke.js
-// include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpcibigv06.js
+// end include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpc0hahhew.js
+// include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmp_97pm8pn.js
 if (!Module["preRun"]) throw "Module.preRun should exist because file support used it; did a pre-js delete it?";
 
 necessaryPreJSTasks.forEach(task => {
   if (Module["preRun"].indexOf(task) < 0) throw "All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?";
 });
 
-// end include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmpcibigv06.js
+// end include: /var/folders/y7/hlnp39y9537cyqx2__885v5m0000gn/T/tmp_97pm8pn.js
 // Sometimes an existing Module object exists with properties
 // meant to overwrite the default module functionality. Here
 // we collect those properties and reapply _after_ we configure
@@ -1080,7 +1108,7 @@ function dbg(...args) {
 // end include: runtime_debug.js
 // === Body ===
 var ASM_CONSTS = {
-  158152: $0 => {
+  158328: $0 => {
     var str = UTF8ToString($0) + "\n\n" + "Abort/Retry/Ignore/AlwaysIgnore? [ariA] :";
     var reply = window.prompt(str, "i");
     if (reply === null) {
@@ -1088,7 +1116,7 @@ var ASM_CONSTS = {
     }
     return allocate(intArrayFromString(reply), "i8", ALLOC_NORMAL);
   },
-  158377: () => {
+  158553: () => {
     if (typeof (AudioContext) !== "undefined") {
       return true;
     } else if (typeof (webkitAudioContext) !== "undefined") {
@@ -1096,7 +1124,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  158524: () => {
+  158700: () => {
     if ((typeof (navigator.mediaDevices) !== "undefined") && (typeof (navigator.mediaDevices.getUserMedia) !== "undefined")) {
       return true;
     } else if (typeof (navigator.webkitGetUserMedia) !== "undefined") {
@@ -1104,7 +1132,7 @@ var ASM_CONSTS = {
     }
     return false;
   },
-  158758: $0 => {
+  158934: $0 => {
     if (typeof (Module["SDL2"]) === "undefined") {
       Module["SDL2"] = {};
     }
@@ -1128,11 +1156,11 @@ var ASM_CONSTS = {
     }
     return SDL2.audioContext === undefined ? -1 : 0;
   },
-  159310: () => {
+  159486: () => {
     var SDL2 = Module["SDL2"];
     return SDL2.audioContext.sampleRate;
   },
-  159378: ($0, $1, $2, $3) => {
+  159554: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     var have_microphone = function(stream) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -1174,7 +1202,7 @@ var ASM_CONSTS = {
       }, have_microphone, no_microphone);
     }
   },
-  161071: ($0, $1, $2, $3) => {
+  161247: ($0, $1, $2, $3) => {
     var SDL2 = Module["SDL2"];
     SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
     SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1206,7 +1234,7 @@ var ASM_CONSTS = {
       SDL2.audio.silenceTimer = setInterval(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1e3);
     }
   },
-  162246: ($0, $1) => {
+  162422: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
     for (var c = 0; c < numChannels; ++c) {
@@ -1225,7 +1253,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  162851: ($0, $1) => {
+  163027: ($0, $1) => {
     var SDL2 = Module["SDL2"];
     var buf = $0 >>> 2;
     var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
@@ -1239,7 +1267,7 @@ var ASM_CONSTS = {
       }
     }
   },
-  163340: $0 => {
+  163516: $0 => {
     var SDL2 = Module["SDL2"];
     if ($0) {
       if (SDL2.capture.silenceTimer !== undefined) {
@@ -1273,7 +1301,7 @@ var ASM_CONSTS = {
       SDL2.audioContext = undefined;
     }
   },
-  164346: ($0, $1, $2) => {
+  164522: ($0, $1, $2) => {
     var w = $0;
     var h = $1;
     var pixels = $2;
@@ -1344,7 +1372,7 @@ var ASM_CONSTS = {
     }
     SDL2.ctx.putImageData(SDL2.image, 0, 0);
   },
-  165814: ($0, $1, $2, $3, $4) => {
+  165990: ($0, $1, $2, $3, $4) => {
     var w = $0;
     var h = $1;
     var hot_x = $2;
@@ -1381,18 +1409,18 @@ var ASM_CONSTS = {
     stringToUTF8(url, urlBuf, url.length + 1);
     return urlBuf;
   },
-  166802: $0 => {
+  166978: $0 => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = UTF8ToString($0);
     }
   },
-  166885: () => {
+  167061: () => {
     if (Module["canvas"]) {
       Module["canvas"].style["cursor"] = "none";
     }
   },
-  166954: () => window.innerWidth,
-  166984: () => window.innerHeight
+  167130: () => window.innerWidth,
+  167160: () => window.innerHeight
 };
 
 // end include: preamble.js

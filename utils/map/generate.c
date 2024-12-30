@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:56:44 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/30 02:02:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 02:38:01 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_object	*get_object_from_char(char c, int x, int y)
 	else if (c == '1')
 		obj = (t_object *)wall_new(x * SPRITE_SIZE,
 				y * SPRITE_SIZE);
-	else if (c == 'C')
+	else if (c == 'C' || c == 'R')
 		obj = (t_object *)food_new(x * SPRITE_SIZE,
 				y * SPRITE_SIZE);
 	else if (c == 'E')

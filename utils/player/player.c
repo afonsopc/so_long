@@ -6,29 +6,11 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/29 23:55:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 03:12:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
-
-int	init_player_sprites(t_player *player)
-{
-	t_sprite		*sprite;
-	t_sprite		*new_sprite;
-
-	sprite = sprite_new("assets/player_open.png");
-	if (!sprite)
-		return (0);
-	new_sprite = sprite_new("assets/player_close.png");
-	if (!new_sprite)
-		return (free(sprite), 0);
-	sprite_append(sprite, new_sprite);
-	sprite_append(sprite, sprite);
-	player->sprite = sprite;
-	player->last_sprite_change_timestamp = get_time();
-	return (1);
-}
 
 void	free_player_ptr(t_player **player)
 {
@@ -57,5 +39,7 @@ int	init_player(int x, int y)
 	player->speed = 1;
 	player->sprite_change_delay = 250;
 	player->last_move_timestamp = get_time();
+	player->sprite_state = 0;
+	player->sprite_direction = 0;
 	return (1);
 }

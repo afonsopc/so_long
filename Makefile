@@ -5,6 +5,7 @@ BONUS=1
 
 SRC += utils/player/player.c utils/player/entity.c utils/player/moviment_count.c 
 SRC += utils/player/global.c utils/player/intercept.c utils/player/wall_collision.c
+SRC += utils/player/sprites.c utils/player/get_sprite.c
 SRC += utils/canvas/canvas.c utils/canvas/global.c
 SRC += utils/map/map.c utils/map/checks.c utils/map/process.c
 SRC += utils/map/generate.c utils/map/has_exit.c utils/map/still_has_food.c
