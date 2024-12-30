@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/29 23:23:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 03:39:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	clear_canvas(void)
 	{
 		x = -1;
 		while (++x <= global_canvas()->width)
-			put_pixel(global_canvas(), x, y, 0x888888);
+			put_pixel(global_canvas(), x, y, 0x000000);
 	}
 }
 

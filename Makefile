@@ -20,7 +20,7 @@ OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJDIR), $(OBJ))
 CC = emcc
 CFLAGS = -Wall -Wextra -Werror -I$(EMSCRIPTEN)/system/include/SDL2 -I$(EMSCRIPTEN)/system/include -I/opt/homebrew/Cellar/sdl2/2.30.10/include/SDL2 -I/opt/homebrew/Cellar/sdl2/2.30.10/include -I/opt/homebrew/Cellar/sdl2_image/2.8.4/include
-LDFLAGS = -s SAFE_HEAP=1 -s ASSERTIONS=1 -s ENVIRONMENT="web" -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file maps --preload-file assets
+LDFLAGS = --shell-file minimal.html -s NO_EXIT_RUNTIME=1 -s DISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1 -s SAFE_HEAP=1 -s ASSERTIONS=1 -s ENVIRONMENT="web" -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file maps --preload-file assets
 VPATH = utils:libft
 MAPS = 4.ber 1.ber 2.ber 3.ber
 
