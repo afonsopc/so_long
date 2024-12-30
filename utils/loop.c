@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:06:12 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 23:22:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:51:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,25 @@ void	move_objects(t_object_list *object_list)
 	}
 }
 
-void	put_moviment_count(void)
-{
-	char	*number;
-
-	number = ft_itoa(global_player()->moviment_count);
-	if (!number)
-		(ft_error("ITOA issue"), exit_game());
-	mlx_set_font(global_mlx()->mlx, global_mlx()->win, "9x15bold");
-	mlx_string_put(global_mlx()->mlx, global_mlx()->win, 10, 20,
-		0xFFFFFF, "Moviment count: ");
-	mlx_string_put(global_mlx()->mlx, global_mlx()->win, 150, 20,
-		0xFFFFFF, number);
-	free(number);
-}
+// put_moviment_count();
 
 int	frame(void)
 {
+	SDL_Texture	*texture;
+
 	clear_canvas();
 	put_objects_in_canvas(*global_object_list());
 	move_objects(*global_object_list());
-	mlx_put_image_to_window(global_mlx()->mlx, global_mlx()->win,
-		global_canvas()->image, 0, 0);
-	put_moviment_count();
+	texture = SDL_CreateTextureFromSurface(global_mlx()->mlx,
+			global_canvas()->image);
+	if (!texture)
+		return (fprintf(stderr, "SDL_CreateTextureFromSurface Error: %s\n",
+				SDL_GetError()), 0);
+	SDL_RenderClear(global_mlx()->mlx);
+	SDL_RenderCopy(global_mlx()->mlx, texture, NULL, NULL);
+	SDL_RenderPresent(global_mlx()->mlx);
+	SDL_DestroyTexture(texture);
+	SDL_Delay(1000 / 60);
 	return (0);
 }
 

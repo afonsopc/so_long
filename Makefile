@@ -1,7 +1,7 @@
 NAME = so_long
 SRC = main.c
 
-BONUS=0
+BONUS=1
 
 SRC += utils/player/player.c utils/player/entity.c utils/player/moviment_count.c 
 SRC += utils/player/global.c utils/player/intercept.c utils/player/wall_collision.c
@@ -16,7 +16,7 @@ OBJDIR = objs/
 OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJDIR), $(OBJ))
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I/opt/homebrew/Cellar/sdl2/2.30.10/include/SDL2 -I/opt/homebrew/Cellar/sdl2/2.30.10/include -I/opt/homebrew/Cellar/sdl2_image/2.8.4/include -D_THREAD_SAFE
 VPATH = utils:libft
 MAPS = 4.ber 1.ber 2.ber 3.ber
 
@@ -26,22 +26,11 @@ else
 	SRC += utils/time.c
 endif
 
-ifeq ($(shell uname -s),Darwin)
-	MLX_COMPILE = echo "\033[1;32mNot compiling mlx...\033[0m"
-    MLX_FLAGS = -Lmlx -lmlx_Darwin -L/usr/X11/lib -lXext -lX11 -lm -framework OpenGL -framework AppKit
-else
-	MLX_COMPILE = echo "\033[1;33mCompiling mlx...\033[0m"; tar -xf minilibx-linux.tgz; make -C minilibx-linux; cp minilibx-linux/libmlx.a mlx/; rm -rf minilibx-linux
-    MLX_FLAGS = -Lmlx -lmlx -lXext -lX11
-endif
-
 all: $(NAME)
 
-$(NAME): mlx/libmlx.a $(OBJDIR) $(OBJS)
+$(NAME): $(OBJDIR) $(OBJS)
 	@echo "\nCompiling $(NAME)...\033[0m"
-	@cc $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
-
-mlx/libmlx.a:
-	@$(MLX_COMPILE)
+	@cc $(CFLAGS) $(OBJS) -L/opt/homebrew/Cellar/sdl2/2.30.10/lib -L/opt/homebrew/Cellar/sdl2_image/2.8.4/lib -lSDL2_image -lSDL2 -o $(NAME)
 
 $(OBJDIR)%.o: %.c
 	@printf "\033[1;33m.\033[0m"
@@ -58,7 +47,7 @@ clean:
 
 fclean: clean
 	@echo "\033[1;31mCleaning binaries...\033[0m"
-	@rm -rf $(NAME) mlx/libmlx.a minilibx-linux
+	@rm -rf $(NAME)
 
 re: fclean all
 
@@ -74,4 +63,4 @@ norm:
 	-@norminette
 	@mv includes/mlx.h.bak includes/mlx.h
 
-.PHONY: all clean fclean re mlx
+.PHONY: all clean fclean re

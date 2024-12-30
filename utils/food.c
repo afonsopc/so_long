@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:54:45 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 16:07:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:56:27 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_food	*food_new(int x, int y)
 	food = malloc(sizeof(t_food));
 	if (!food)
 		return (NULL);
-	food->sprite = sprite_new("assets/food.xpm");
+	food->sprite = sprite_new("assets/food.png");
 	if (!food->sprite)
 		return (free(food), NULL);
 	food->entity = entity_new(x, y);

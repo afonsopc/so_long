@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/06 18:00:45 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:56:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_sprite	*default_get_sprite(void *this)
 {
 	(void)this;
 	ft_error("get_sprite() not implemented. (could cause leaks)");
-	return (sprite_new("assets/pt.xpm"));
+	return (sprite_new("assets/pt.png"));
 }
 
 void	default_free(void *this)

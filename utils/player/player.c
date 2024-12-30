@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 22:18:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:55:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	init_player_sprites(t_player *player)
 	t_sprite		*sprite;
 	t_sprite		*new_sprite;
 
-	sprite = sprite_new("assets/player_open.xpm");
+	sprite = sprite_new("assets/player_open.png");
 	if (!sprite)
 		return (0);
-	new_sprite = sprite_new("assets/player_close.xpm");
+	new_sprite = sprite_new("assets/player_close.png");
 	if (!new_sprite)
 		return (free(sprite), 0);
 	sprite_append(sprite, new_sprite);

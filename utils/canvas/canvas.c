@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 23:05:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:23:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	init_canvas(int width, int height)
 {
-	t_image	**canvas_ptr;
-	t_image	*canvas;
-	void	*canvas_img;
+	t_image		**canvas_ptr;
+	t_image		*canvas;
+	SDL_Surface	*canvas_surface;
 
 	canvas_ptr = get_global_canvas();
 	*canvas_ptr = malloc(sizeof(t_image));
@@ -25,11 +25,11 @@ int	init_canvas(int width, int height)
 	canvas = *canvas_ptr;
 	canvas->width = width;
 	canvas->height = height;
-	canvas_img = mlx_new_image(global_mlx()->mlx,
-			canvas->width, canvas->height);
-	if (!canvas_img)
+	canvas_surface = SDL_CreateRGBSurface(0, width, height,
+			32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+	if (!canvas_surface)
 		return (free(canvas), 0);
-	canvas->image = canvas_img;
+	canvas->image = canvas_surface;
 	return (1);
 }
 

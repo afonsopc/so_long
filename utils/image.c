@@ -6,65 +6,59 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:05:10 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/07 23:10:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/30 00:04:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	free_image(t_image	*image)
+void	free_image(t_image *image)
 {
 	if (!image)
 		return ;
-	mlx_destroy_image(global_mlx()->mlx, image->image);
+	if (image->image)
+		SDL_FreeSurface(image->image);
 	free(image);
 }
 
-t_image	*new_image_from_file(char	*path)
+t_image	*new_image_from_file(char *path)
 {
-	t_image	*image;
+	t_image		*image;
+	SDL_Surface	*surface;
+	SDL_Surface	*optimized_surface;
 
 	if (!path)
 		return (NULL);
 	image = malloc(sizeof(t_image));
 	if (!image)
 		return (NULL);
-	image->image = mlx_xpm_file_to_image(global_mlx()->mlx, path,
-			&image->width, &image->height);
-	if (!image->image)
+	surface = IMG_Load(path);
+	if (!surface)
 		return (free(image), NULL);
+	optimized_surface = SDL_ConvertSurfaceFormat(surface,
+			SDL_PIXELFORMAT_RGBA8888, 0);
+	SDL_FreeSurface(surface);
+	if (!optimized_surface)
+		return (free(image), NULL);
+	image->image = optimized_surface;
+	image->width = optimized_surface->w;
+	image->height = optimized_surface->h;
 	return (image);
 }
 
 unsigned int	get_pixel(t_image *image, int x, int y)
 {
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	char	*data;
-	char	*pixel;
-
-	data = mlx_get_data_addr(image->image, &bits_per_pixel,
-			&size_line, &endian);
-	pixel = data + (y * size_line) + (x * (bits_per_pixel / 8));
-	return (*(unsigned int *)pixel);
+	return (((Uint32 *)image->image->pixels)[(y * image->image->w) + x]);
 }
 
 void	put_pixel(t_image *image, int x, int y, unsigned int color)
 {
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	char	*data;
-	char	*pixel;
+	Uint32	*pixels;
 
-	if (x < 0 || y < 0
-		|| x >= image->width || y >= image->height)
+	pixels = (Uint32 *)image->image->pixels;
+	if (x < 0 || y < 0 || x >= image->width || y >= image->height)
 		return ;
-	data = mlx_get_data_addr(image->image, &bits_per_pixel,
-			&size_line, &endian);
-	pixel = data + (y * size_line) + (x * (bits_per_pixel / 8));
-	*(unsigned int *)pixel = color;
+	pixels[(y * image->image->w) + x] = color;
 }
 
 void	put_image(t_image *src, t_image *dst, int x, int y)
@@ -73,15 +67,17 @@ void	put_image(t_image *src, t_image *dst, int x, int y)
 	int				j;
 	unsigned int	color;
 
-	i = -1;
-	while (++i < src->width)
+	i = 0;
+	while (i < src->height)
 	{
-		j = -1;
-		while (++j < src->height)
+		j = 0;
+		while (j < src->width)
 		{
-			color = get_pixel(src, i, j);
+			color = get_pixel(src, j, i);
 			if (color != 0xFF000000)
-				put_pixel(dst, x + i, y + j, color);
+				put_pixel(dst, x + j, y + i, color);
+			j++;
 		}
+		i++;
 	}
 }

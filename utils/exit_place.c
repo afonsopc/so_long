@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:49:55 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 17:05:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:56:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_exit_place	*exit_place_new(int x, int y)
 	exit_place = malloc(sizeof(t_exit_place));
 	if (!exit_place)
 		return (NULL);
-	exit_place->sprite = sprite_new("assets/door.xpm");
+	exit_place->sprite = sprite_new("assets/door.png");
 	if (!exit_place->sprite)
 		return (free(exit_place), NULL);
 	exit_place->entity = entity_new(x, y);

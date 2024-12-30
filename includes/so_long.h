@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:18:25 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/09 22:38:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:37:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <fcntl.h>
 # include <aio.h>
 # include "mlx.h"
+# include <SDL2/SDL.h>
+# include <SDL2/SDL_image.h>
 
 # ifndef W_HEIGHT
 #  define W_HEIGHT 500
@@ -55,15 +57,15 @@
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*win;
+	SDL_Renderer	*mlx;
+	void			*win;
 }	t_mlx;
 
 typedef struct s_image
 {
-	void	*image;
-	int		height;
-	int		width;
+	SDL_Surface	*image;
+	int			height;
+	int			width;
 }	t_image;
 
 typedef struct s_sprite

@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:54:45 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/08 15:48:56 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:56:29 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_wall	*wall_new(int x, int y)
 	wall = malloc(sizeof(t_wall));
 	if (!wall)
 		return (NULL);
-	wall->sprite = sprite_new("assets/wall.xpm");
+	wall->sprite = sprite_new("assets/wall.png");
 	if (!wall->sprite)
 		return (free(wall), NULL);
 	wall->entity = entity_new(x, y);
