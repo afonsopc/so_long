@@ -2,6 +2,8 @@
 
 This project is a very small 2D game. It is built to make you work with textures, sprites. And some very basic gameplay elements.
 
+![solongweb](https://github.com/user-attachments/assets/6515ba40-198e-4286-ad96-d6dd48d92429)
+
 ## How to play
 
 ### Web
